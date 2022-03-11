@@ -19,6 +19,8 @@
         <module>zaq-mq</module>
         <module>zaq-redis</module>
         <module>zaq-dao</module>
+        <module>zaq-workflow</module>
+        <module>zaq-web</module>
     </modules>
 
     <properties>
@@ -38,6 +40,7 @@
         <!-- hutool -->
         <hutool.version>5.7.17</hutool.version>
         <knife4j-version>2.0.8</knife4j-version>
+        <activiti.version>5.22.0</activiti.version>
     </properties>
 
     <dependencyManagement>
@@ -45,6 +48,11 @@
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-comm</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zaqbest</groupId>
+                <artifactId>zaq-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -62,6 +70,11 @@
                 <artifactId>zaq-redis</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.zaqbest</groupId>
+                <artifactId>zaq-workflow</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.redisson</groupId>
@@ -74,6 +87,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>3.4.3.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>2.1.4</version>
             </dependency>
 
             <dependency>
@@ -137,12 +156,6 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>3.0.0</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-logging</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
             <!-- hutool -->
@@ -163,6 +176,48 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>6.1.7.Final</version>
             </dependency>
+
+            <!-- activiti begin -->
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-engine</artifactId>
+                <version>${activiti.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-spring</artifactId>
+                <version>${activiti.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-modeler</artifactId>
+                <version>${activiti.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-diagram-rest</artifactId>
+                <version>${activiti.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-explorer</artifactId>
+                <version>${activiti.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.vaadin.addons</groupId>
+                        <artifactId>dcharts-widget</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- activiti end -->
         </dependencies>
 
     </dependencyManagement>
