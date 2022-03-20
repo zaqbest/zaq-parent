@@ -21,6 +21,7 @@
         <module>zaq-dao</module>
         <module>zaq-workflow</module>
         <module>zaq-web</module>
+        <module>zaq-rpc</module>
     </modules>
 
     <properties>
@@ -73,6 +74,11 @@
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-workflow</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zaqbest</groupId>
+                <artifactId>zaq-rpc</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -227,7 +233,7 @@
                 <!-- 要将源码放上去，需要加入这个插件 -->
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.0.1</version>
                     <configuration>
                         <attach>true</attach>
                     </configuration>
@@ -271,33 +277,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
-                <!-- 打版本插件 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.3</version>
-                    <configuration>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.10.4</version>
-                    <executions>
-                        <execution>
-                            <id>attach-javadocs</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                            <configuration>
-                                <addtionalparam>-Xdoclint:none</addtionalparam>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -318,4 +297,18 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <!-- 两个ID必须与 setting.xml中的<server><id>nexus-releases</id></server>保持一致-->
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://maven.zaqbest.com:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://maven.zaqbest.com:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
