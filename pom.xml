@@ -298,8 +298,9 @@
         </plugins>
     </build>
 
+    <!--
     <distributionManagement>
-        <!-- 两个ID必须与 setting.xml中的<server><id>nexus-releases</id></server>保持一致-->
+         //两个ID必须与 setting.xml中的<server><id>nexus-releases</id></server>保持一致
         <repository>
             <id>nexus-releases</id>
             <name>Nexus Release Repository</name>
@@ -311,4 +312,5 @@
             <url>http://maven.zaqbest.com:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+    -->
 </project>
