@@ -1,20 +1,15 @@
-package com.zaqbest.redis;
+package com.zaqbest.comm.config;
 
 import io.netty.channel.nio.NioEventLoopGroup;
-import lombok.Data;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.client.codec.Codec;
 import org.redisson.config.Config;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ClassUtils;
 
 //@ConfigurationProperties(prefix = "spring.redisson")
-//@Configuration
-@Data
-public class RedissonConfig {
+public class BaseRedissonConfig {
 
     private String address;
     private int connectionMinimumIdleSize = 10;
@@ -38,7 +33,7 @@ public class RedissonConfig {
 
     private int thread; //当前处理核数量 * 2
 
-    private String codec = "org.redisson.codec.JsonJacksonCodec";
+    private static final String CODEC = "org.redisson.codec.JsonJacksonCodec";
 
     @Bean(destroyMethod = "shutdown")
     RedissonClient redisson() throws Exception {
@@ -58,7 +53,7 @@ public class RedissonConfig {
                 .setConnectTimeout(connectTimeout)
                 .setIdleConnectionTimeout(idleConnectionTimeout)
                 .setPassword(password);
-        Codec codec = (Codec) ClassUtils.forName(getCodec(), ClassUtils.getDefaultClassLoader()).newInstance();
+        Codec codec = (Codec) ClassUtils.forName(CODEC, ClassUtils.getDefaultClassLoader()).newInstance();
         config.setCodec(codec);
         config.setThreads(thread);
         config.setEventLoopGroup(new NioEventLoopGroup());

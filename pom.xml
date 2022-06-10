@@ -13,15 +13,14 @@
     <groupId>com.zaqbest</groupId>
     <artifactId>zaq-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <modules>
         <module>zaq-comm</module>
         <module>zaq-mq</module>
-        <module>zaq-redis</module>
         <module>zaq-dao</module>
         <module>zaq-workflow</module>
-        <module>zaq-web</module>
         <module>zaq-rpc</module>
+        <module>zaq-security</module>
     </modules>
 
     <properties>
@@ -53,22 +52,12 @@
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-web</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-mq</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-redis</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -226,6 +215,35 @@
         </dependencies>
 
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement>
