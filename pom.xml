@@ -67,6 +67,11 @@
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
+                <artifactId>zaq-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-rpc</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -212,6 +217,16 @@
                 </exclusions>
             </dependency>
             <!-- activiti end -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>1.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>1.4.0</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
