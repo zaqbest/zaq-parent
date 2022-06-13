@@ -30,7 +30,6 @@
         <project.build.locales>zh_CN</project.build.locales>
         <java.version>1.8</java.version>
         <project.build.jdk>${java.version}</project.build.jdk>
-
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <nacos-config-spring-boot.version>2.2.2.RELEASE</nacos-config-spring-boot.version>
         <nacos-discovery-spring-boot.version>2.2.2.RELEASE</nacos-discovery-spring-boot.version>
@@ -40,6 +39,7 @@
         <hutool.version>5.7.17</hutool.version>
         <knife4j-version>2.0.8</knife4j-version>
         <activiti.version>5.22.0</activiti.version>
+        <zaq.version>1.1.0-SNAPSHOT</zaq.version>
     </properties>
 
     <dependencyManagement>
@@ -47,32 +47,32 @@
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-comm</artifactId>
-                <version>${project.version}</version>
+                <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-dao</artifactId>
-                <version>${project.version}</version>
+                <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-mq</artifactId>
-                <version>${project.version}</version>
+                <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-workflow</artifactId>
-                <version>${project.version}</version>
+                <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-security</artifactId>
-                <version>${project.version}</version>
+                <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-rpc</artifactId>
-                <version>${project.version}</version>
+                <version>${zaq.version}</version>
             </dependency>
 
             <dependency>
