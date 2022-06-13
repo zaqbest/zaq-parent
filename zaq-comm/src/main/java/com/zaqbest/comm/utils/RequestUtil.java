@@ -1,5 +1,7 @@
 package com.zaqbest.comm.utils;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -9,6 +11,8 @@ import java.net.UnknownHostException;
  * Created by macro on 2020/10/8.
  */
 public class RequestUtil {
+    private static final String APP_KEY = "APP_KEY";
+    private static final String APP_SECRET = "APP_SECRET";
 
     /**
      * 获取请求真实IP地址
@@ -42,6 +46,14 @@ public class RequestUtil {
             }
         }
         return ipAddress;
+    }
+
+    public static String getAppKey(HttpServletRequest request){
+        return request.getHeader(APP_KEY);
+    }
+
+    public static String getAppSecret(HttpServletRequest request){
+        return request.getHeader(APP_SECRET);
     }
 
 }

@@ -32,7 +32,6 @@
         <project.build.jdk>${java.version}</project.build.jdk>
 
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
-        <fastjson.version>1.2.80</fastjson.version>
         <nacos-config-spring-boot.version>2.2.2.RELEASE</nacos-config-spring-boot.version>
         <nacos-discovery-spring-boot.version>2.2.2.RELEASE</nacos-discovery-spring-boot.version>
         <druid-spring-boot-starter.version>1.1.16</druid-spring-boot-starter.version>
@@ -111,13 +110,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter</artifactId>
                 <version>2.2.5.RELEASE</version>
-            </dependency>
-
-            <!-- fastjson -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
             </dependency>
 
             <!-- druid -->
