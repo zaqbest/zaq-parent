@@ -10,6 +10,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,9 @@ import java.util.List;
  */
 public abstract class BaseSwaggerConfig {
 
+    @Resource
+    private BaseAppConfig appConfig;
+
     @Bean
     public Docket createRestApi() {
         SwaggerProperties swaggerProperties = swaggerProperties();
@@ -27,7 +31,8 @@ public abstract class BaseSwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getApiBasePackage()))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .enable(appConfig != null ? appConfig.getSwaggerEnable() : false);
         if (swaggerProperties.isEnableSecurity()) {
             docket.securitySchemes(securitySchemes()).securityContexts(securityContexts());
         }
