@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 //@Configuration
 //@RefreshScope
 @Data
-abstract class BaseAppConfig {
+public abstract class BaseAppConfig {
     /**
      * 读取配置文件中的enable，true为显示，false为隐藏
      */

@@ -1,6 +1,7 @@
 package com.zaqbest.base.web.config;
 
 import com.zaqbest.base.web.domain.SwaggerProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public abstract class BaseSwaggerConfig {
 
-    @Resource
+    @Autowired
     private BaseAppConfig appConfig;
 
     @Bean
