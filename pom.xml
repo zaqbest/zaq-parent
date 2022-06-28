@@ -11,16 +11,18 @@
     </parent>
 
     <groupId>com.zaqbest</groupId>
-    <artifactId>zaq-parent</artifactId>
+    <artifactId>zaq-base-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <modules>
-        <module>zaq-comm</module>
-        <module>zaq-mq</module>
-        <module>zaq-dao</module>
-        <module>zaq-workflow</module>
-        <module>zaq-rpc</module>
-        <module>zaq-security</module>
+        <module>zaq-base-comm</module>
+        <module>zaq-base-web</module>
+        <module>zaq-base-mq</module>
+        <module>zaq-base-dao</module>
+        <module>zaq-base-workflow</module>
+        <module>zaq-base-rpc</module>
+        <module>zaq-base-security</module>
+        <module>zaq-base-redis</module>
     </modules>
 
     <properties>
@@ -39,40 +41,50 @@
         <hutool.version>5.7.17</hutool.version>
         <knife4j-version>2.0.8</knife4j-version>
         <activiti.version>5.22.0</activiti.version>
-        <zaq.version>1.1.0-SNAPSHOT</zaq.version>
+        <zaq-base.version>1.2.0-SNAPSHOT</zaq-base.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-comm</artifactId>
-                <version>${zaq.version}</version>
+                <artifactId>zaq-base-comm</artifactId>
+                <version>${zaq-base.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-dao</artifactId>
-                <version>${zaq.version}</version>
+                <artifactId>zaq-base-web</artifactId>
+                <version>${zaq-base.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-mq</artifactId>
-                <version>${zaq.version}</version>
+                <artifactId>zaq-base-dao</artifactId>
+                <version>${zaq-base.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-workflow</artifactId>
-                <version>${zaq.version}</version>
+                <artifactId>zaq-base-mq</artifactId>
+                <version>${zaq-base.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-security</artifactId>
-                <version>${zaq.version}</version>
+                <artifactId>zaq-base-workflow</artifactId>
+                <version>${zaq-base.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-rpc</artifactId>
-                <version>${zaq.version}</version>
+                <artifactId>zaq-base-security</artifactId>
+                <version>${zaq-base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zaqbest</groupId>
+                <artifactId>zaq-base-rpc</artifactId>
+                <version>${zaq-base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zaqbest</groupId>
+                <artifactId>zaq-base-redis</artifactId>
+                <version>${zaq-base.version}</version>
             </dependency>
 
             <dependency>
