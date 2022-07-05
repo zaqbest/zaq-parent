@@ -36,6 +36,7 @@
         <zaq-base.version>1.2.0-SNAPSHOT</zaq-base.version>
 
         <spring-cloud.version>2.2.5.RELEASE</spring-cloud.version>
+        <openfeign-spring-cloud.version>2.2.5.RELEASE</openfeign-spring-cloud.version>
 
         <nacos-config-spring-boot.version>2.2.2.RELEASE</nacos-config-spring-boot.version>
         <nacos-discovery-spring-boot.version>2.2.2.RELEASE</nacos-discovery-spring-boot.version>
@@ -131,6 +132,12 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter</artifactId>
                 <version>${spring-cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${openfeign-spring-cloud.version}</version>
             </dependency>
 
             <!-- mysql -->
