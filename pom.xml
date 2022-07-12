@@ -20,9 +20,10 @@
         <module>zaq-base-mq</module>
         <module>zaq-base-dao</module>
         <module>zaq-base-workflow</module>
-        <module>zaq-base-rpc</module>
+        <module>zaq-base-rpc-rest</module>
         <module>zaq-base-security</module>
         <module>zaq-base-redis</module>
+        <module>zaq-base-rpc-dubbo</module>
     </modules>
 
     <properties>
@@ -89,7 +90,12 @@
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-rpc</artifactId>
+                <artifactId>zaq-base-rpc-rest</artifactId>
+                <version>${zaq-base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zaqbest</groupId>
+                <artifactId>zaq-base-rpc-dubbo</artifactId>
                 <version>${zaq-base.version}</version>
             </dependency>
             <dependency>
@@ -246,10 +252,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
