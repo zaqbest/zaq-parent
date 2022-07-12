@@ -24,6 +24,7 @@
         <module>zaq-base-security</module>
         <module>zaq-base-redis</module>
         <module>zaq-base-rpc-dubbo</module>
+        <module>zaq-base-auth</module>
     </modules>
 
     <properties>
@@ -101,6 +102,11 @@
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-redis</artifactId>
+                <version>${zaq-base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zaqbest</groupId>
+                <artifactId>zaq-base-auth</artifactId>
                 <version>${zaq-base.version}</version>
             </dependency>
 
