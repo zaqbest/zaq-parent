@@ -12,8 +12,6 @@ import com.zaqbest.base.auth.enums.TokenSatusEnum;
 import com.zaqbest.base.auth.manager.JwtManager;
 import com.zaqbest.base.auth.service.CacheService;
 import com.zaqbest.base.auth.service.UserFacade;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -22,18 +20,19 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 /**
  * 自定义Realm
  */
-public abstract class BaseUserRealm extends AuthorizingRealm {
+public abstract class BaseJwtTokenRealm extends AuthorizingRealm {
 
-	private Logger logger = LogManager.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	@Lazy

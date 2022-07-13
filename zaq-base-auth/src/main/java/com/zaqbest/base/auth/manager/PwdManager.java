@@ -5,6 +5,7 @@ package com.zaqbest.base.auth.manager;
 
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
 
 /**
  * ***************************************************************************
@@ -35,7 +36,7 @@ public class PwdManager {
 	}
 
 	public static String entryptPassword(String password, String saltstr) {
-		return StrUtil.format("{}|{}", saltstr, password);
+		return SecureUtil.sha256(StrUtil.format("{}|{}", saltstr, password));
 	}
 
 }

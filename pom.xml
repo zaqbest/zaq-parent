@@ -20,11 +20,9 @@
         <module>zaq-base-mq</module>
         <module>zaq-base-dao</module>
         <module>zaq-base-workflow</module>
-        <module>zaq-base-rpc-rest</module>
-        <module>zaq-base-security</module>
         <module>zaq-base-redis</module>
         <module>zaq-base-rpc-dubbo</module>
-        <module>zaq-base-auth</module>
+<!--        <module>zaq-base-auth</module>-->
     </modules>
 
     <properties>
@@ -257,18 +255,17 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -277,11 +274,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
         </dependency>
     </dependencies>
 

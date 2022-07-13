@@ -1,9 +1,16 @@
-package com.zaqbest.base.rpc.common;
+package com.zaqbest.base.comm.dto;
 
 public enum ResultCodeEnum {
     /*** 通用部分 100 - 599***/
     // 成功请求
-    SUCCESS(200, "successful"),
+    OK(200, "Ok"),
+    BAD_REQUEST(400, "Bad Request"),
+    UNAUTHORIZED(401, "Unauthorized"),
+    FORBIDDEN(403, "Forbidden"),
+    NOT_FOUND(404, "Not Found"),
+    INTERNAL_ERROR(500, "Internal Server Error"),
+    BAD_GATEWAY(502, "Bad Gateway"),
+    UNAVAILABLE(503, "Service Unavailable"),
 
     /*** 这里可以根据不同模块用不同的区级分开错误码，例如:  ***/
 

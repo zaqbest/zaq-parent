@@ -1,14 +1,13 @@
 package com.zaqbest.base.auth.shiro;
 
-import cn.hutool.http.HttpStatus;
+import cn.hutool.core.util.StrUtil;
 import com.zaqbest.base.auth.constant.AppConstant;
 import com.zaqbest.base.auth.manager.JwtManager;
 import com.zaqbest.base.auth.manager.TokenManager;
 import com.zaqbest.base.auth.utils.IpUtils;
-import io.micrometer.core.instrument.util.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletRequest;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class JwtFilter extends BasicHttpAuthenticationFilter {
 
-    private Logger logger = LogManager.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     private TokenManager tokenManager;
 
@@ -34,21 +33,16 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             HttpServletRequest httpServletRequest = (HttpServletRequest) request;
             String token = httpServletRequest.getHeader(AppConstant.TOKEN_NAME);
             //通过ip判断Token请求是否合法
-            if (StringUtils.isNotBlank(token)) {
+            if (StrUtil.isNotBlank(token)) {
                 String requestIp = IpUtils.getIpAddr(httpServletRequest);
                 String tokenIp = JwtManager.getLoginIp(token);
                 executeLogin(request, response);
                 logger.info("token中ip为:{}, 访问的ip为:{}", requestIp, tokenIp);
-//				if(StringUtils.equals(requestIp, tokenIp)) {
-//					executeLogin(request, response);
-//				}else {
-//					logger.info("token中ip为:{}, 访问的ip为:{}, 访问拒绝", requestIp, tokenIp);
-//				}
             }
 
         } catch (Exception e) {
 
-            logger.error("token解析出现异常,访问拒绝,异常信息为", e);
+            logger.error("token解析出现异常,访问拒绝,异常信息为: {}", e.getMessage());
         }
         return true;
     }

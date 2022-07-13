@@ -65,7 +65,7 @@ public class AppConstant {
 	/**
 	 * token的变量名
 	 */
-	public static final String TOKEN_NAME = "authorization";
+	public static final String TOKEN_NAME = "token";
 
 	public static final String TOKEN_ORG_ID = "OrgId";
 	

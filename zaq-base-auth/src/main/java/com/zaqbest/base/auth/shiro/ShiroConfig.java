@@ -78,13 +78,8 @@ public class ShiroConfig {
 		return factoryBean;
 	}
 
-//	public ShrioRedisCacheManager cacheManager(RedisClient redisClient) {
-//
-//		return new ShrioRedisCacheManager(redisClient);
-//	}
-
 	@Bean
-	public SecurityManager securityManager(BaseUserRealm realm) {
+	public SecurityManager securityManager(BaseJwtTokenRealm realm) {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(realm);
 
