@@ -1,9 +1,11 @@
-package com.zaqbest.base.comm.dto;
+package com.zaqbest.base.comm.enums;
 
-public enum ResultCodeEnum {
+import com.zaqbest.base.comm.dto.IErrorCode;
+
+public enum ResultCodeEnum implements IErrorCode {
     /*** 通用部分 100 - 599***/
     // 成功请求
-    OK(200, "Ok"),
+    SUCCESS(200, "Success"),
     BAD_REQUEST(400, "Bad Request"),
     UNAUTHORIZED(401, "Unauthorized"),
     FORBIDDEN(403, "Forbidden"),
@@ -18,8 +20,6 @@ public enum ResultCodeEnum {
     // 2000～2999 区间表示订单模块错误
     // 3000～3999 区间表示商品模块错误
     // 。。。
-
-    ORDER_NOT_FOUND(2000, "order not found"),
     ;
     /**
      * 响应状态码

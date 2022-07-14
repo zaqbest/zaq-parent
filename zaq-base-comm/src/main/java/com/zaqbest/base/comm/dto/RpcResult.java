@@ -1,6 +1,7 @@
 package com.zaqbest.base.comm.dto;
 
 import cn.hutool.core.util.StrUtil;
+import com.zaqbest.base.comm.enums.ResultCodeEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -30,19 +31,19 @@ public class RpcResult<T> implements Serializable {
      * 无参构造器(构造器私有，外部不可以直接创建)
      */
     private RpcResult() {
-        this.code = ResultCodeEnum.OK.getCode();
+        this.code = ResultCodeEnum.SUCCESS.getCode();
         this.success = true;
-        this.message = ResultCodeEnum.OK.getMessage();
+        this.message = ResultCodeEnum.SUCCESS.getMessage();
     }
     /**
      * 有参构造器
      * @param obj
      */
     private RpcResult(T obj) {
-        this.code = ResultCodeEnum.OK.getCode();
+        this.code = ResultCodeEnum.SUCCESS.getCode();
         this.data = obj;
         this.success = true;
-        this.message = ResultCodeEnum.OK.getMessage();
+        this.message = ResultCodeEnum.SUCCESS.getMessage();
     }
 
     private RpcResult(ResultCodeEnum resultCode) {
@@ -55,6 +56,12 @@ public class RpcResult<T> implements Serializable {
         this.success = false;
         this.code = resultCode.getCode();
         this.message = StrUtil.isEmpty(msg) ? resultCode.getMessage() : msg;
+    }
+
+    private RpcResult(Integer code, String msg) {
+        this.success = false;
+        this.code = code;
+        this.message = msg;
     }
 
     /**
@@ -88,6 +95,10 @@ public class RpcResult<T> implements Serializable {
 
     public static<T> RpcResult<T> failure(String message){
         return  new RpcResult<T>(ResultCodeEnum.INTERNAL_ERROR, message);
+    }
+
+    public static<T> RpcResult<T> failure(Integer code, String message){
+        return  new RpcResult<T>(code, message);
     }
 
     /**

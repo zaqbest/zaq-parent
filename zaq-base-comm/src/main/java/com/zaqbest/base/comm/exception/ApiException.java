@@ -1,7 +1,6 @@
-package com.zaqbest.base.web.exception;
+package com.zaqbest.base.comm.exception;
 
-
-import com.zaqbest.base.web.api.IErrorCode;
+import com.zaqbest.base.comm.dto.IErrorCode;
 
 /**
  * 自定义API异常

@@ -1,4 +1,4 @@
-package com.zaqbest.base.web.api;
+package com.zaqbest.base.comm.dto;
 
 /**
  * 常用API返回对象接口
@@ -8,7 +8,7 @@ public interface IErrorCode {
     /**
      * 返回码
      */
-    long getCode();
+    Integer getCode();
 
     /**
      * 返回信息
