@@ -1,4 +1,4 @@
-package com.zaqbest.base.comm.dto;
+package com.zaqbest.base.comm.enums;
 
 /**
  * 常用API返回对象接口

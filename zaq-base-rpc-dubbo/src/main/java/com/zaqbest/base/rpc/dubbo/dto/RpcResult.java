@@ -1,4 +1,4 @@
-package com.zaqbest.base.comm.dto;
+package com.zaqbest.base.rpc.dubbo.dto;
 
 import cn.hutool.core.util.StrUtil;
 import com.zaqbest.base.comm.enums.ResultCodeEnum;

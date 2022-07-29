@@ -1,7 +1,5 @@
 package com.zaqbest.base.comm.enums;
 
-import com.zaqbest.base.comm.dto.IErrorCode;
-
 public enum ResultCodeEnum implements IErrorCode {
     /*** 通用部分 100 - 599***/
     // 成功请求

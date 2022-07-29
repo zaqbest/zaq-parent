@@ -1,6 +1,6 @@
 package com.zaqbest.base.comm.exception;
 
-import com.zaqbest.base.comm.dto.IErrorCode;
+import com.zaqbest.base.comm.enums.IErrorCode;
 
 /**
  * 自定义API异常

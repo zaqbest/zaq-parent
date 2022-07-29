@@ -1,11 +1,16 @@
-package com.zaqbest.base.comm.dto;
+package com.zaqbest.base.web.api;
 
+
+import com.zaqbest.base.comm.enums.IErrorCode;
 import com.zaqbest.base.comm.enums.ResultCodeEnum;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 通用返回对象
  * Created by macro on 2019/4/19.
  */
+@ApiModel
 public class CommonResult<T> {
     /**
      * 状态码
@@ -18,6 +23,7 @@ public class CommonResult<T> {
     /**
      * 数据封装
      */
+    @ApiModelProperty("报文体")
     private T data;
 
     protected CommonResult() {
