@@ -41,7 +41,7 @@
         <nacos-config-spring-boot.version>2.2.2.RELEASE</nacos-config-spring-boot.version>
         <nacos-discovery-spring-boot.version>2.2.2.RELEASE</nacos-discovery-spring-boot.version>
 
-        <mysql.version>5.1.40</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <mybatis-boot.version>2.1.4</mybatis-boot.version>
         <mybatis-plus-boot.version>3.4.3.4</mybatis-plus-boot.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
@@ -84,16 +84,6 @@
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-security</artifactId>
-                <version>${zaq-base.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-rpc-rest</artifactId>
-                <version>${zaq-base.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-rpc-dubbo</artifactId>
                 <version>${zaq-base.version}</version>
             </dependency>
@@ -102,12 +92,6 @@
                 <artifactId>zaq-base-redis</artifactId>
                 <version>${zaq-base.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-auth</artifactId>
-                <version>${zaq-base.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
