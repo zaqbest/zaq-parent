@@ -13,6 +13,7 @@ public interface CommonMapper<T> extends BaseMapper<T> {
      *
      * @param queryWrapper 实体对象封装操作类（可以为 null）
      */
+
     T selectOneForUpdate(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
     /**
      * 根据 entity 条件，查询全部记录并锁定
