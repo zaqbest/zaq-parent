@@ -22,7 +22,6 @@
         <module>zaq-base-workflow</module>
         <module>zaq-base-redis</module>
         <module>zaq-base-rpc-dubbo</module>
-<!--        <module>zaq-base-auth</module>-->
     </modules>
 
     <properties>
