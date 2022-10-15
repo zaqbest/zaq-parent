@@ -124,7 +124,7 @@ public class SameClusterPriorityWithVersionRule extends AbstractLoadBalancerRule
             }
         }
 
-        return  ExtendBalancer.getHostByRandomWeight2(theSameClusterNameAndTheSameVersionInstList);
+        return  ExtendBalancer.getHostByRandomWeight2(allInstance);
     }
 
     /**
