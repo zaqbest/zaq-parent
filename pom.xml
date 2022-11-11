@@ -267,6 +267,7 @@
                 <!-- 要将源码放上去，需要加入这个插件 -->
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.1</version>
                     <configuration>
                         <attach>true</attach>
                     </configuration>
@@ -328,19 +329,19 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>nexus</id>
-            <url>http://10.30.4.51:8081/nexus/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>nexus</id>-->
+<!--            <url>http://10.30.4.51:8081/nexus/content/groups/public</url>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                <enabled>true</enabled>-->
+<!--                <updatePolicy>always</updatePolicy>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
     <!-- 安装部署至私服上：mvn clean install -Dmaven.test.skip=true deploy -->
     <!--    两个ID必须与 setting.xml中的<server><id>nexus-releases</id></server>保持一致-->
