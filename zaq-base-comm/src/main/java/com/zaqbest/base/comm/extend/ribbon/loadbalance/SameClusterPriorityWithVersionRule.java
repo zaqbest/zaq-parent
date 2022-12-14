@@ -42,6 +42,8 @@ public class SameClusterPriorityWithVersionRule extends AbstractLoadBalancerRule
     @Autowired
     private NacosServiceManager nacosServiceManager;
 
+    private static final String DEFAULT_VERSION = "1.0.0";
+
     @Override
     public void initWithNiwsConfig(IClientConfig clientConfig) {
 
@@ -55,13 +57,16 @@ public class SameClusterPriorityWithVersionRule extends AbstractLoadBalancerRule
             String localClusterName = discoveryProperties.getClusterName();
 
             String currentVersion = getServiceVersion(discoveryProperties);
+            if (currentVersion == null){
+                currentVersion = DEFAULT_VERSION;
+            }
 
             //去nacos上获取和本地 相同集群   相同版本的所有实例信息
             Instance clusterInst = getInstancesWithVersion(discoveryProperties, currentVersion, true);
 
             if (clusterInst != null){
                 log.info("同集群同版本调用--->当前微服务所在集群:{},被调用微服务所在集群:{},当前微服务的版本:{},被调用微服务版本:{},Host:{},Port:{}",
-                        localClusterName,clusterInst.getClusterName(),discoveryProperties.getMetadata().get("currentVersion"),
+                        localClusterName,clusterInst.getClusterName(),currentVersion,
                         clusterInst.getMetadata().get("currentVersion"),clusterInst.getIp(),clusterInst.getPort());
             } else {
                 clusterInst = getInstancesWithVersion(discoveryProperties, currentVersion, false);
@@ -72,7 +77,7 @@ public class SameClusterPriorityWithVersionRule extends AbstractLoadBalancerRule
                 }
 
                 log.info("跨集群同版本调用--->当前微服务所在集群:{},被调用微服务所在集群:{},当前微服务的版本:{},被调用微服务版本:{},Host:{},Port:{}",
-                        localClusterName ,clusterInst.getClusterName(),discoveryProperties.getMetadata().get("currentVersion"),
+                        localClusterName ,clusterInst.getClusterName(),currentVersion,
                         clusterInst.getMetadata().get("currentVersion"),clusterInst.getIp(),clusterInst.getPort());
             }
 
@@ -116,10 +121,16 @@ public class SameClusterPriorityWithVersionRule extends AbstractLoadBalancerRule
         if (StrUtil.isNotEmpty(currentVersion)) {
             //过滤相同集群  同版本号的实例
             for (Instance instance : allInstance) {
-                if ((mustSameCluster && StringUtils.endsWithIgnoreCase(instance.getClusterName(), currentClusterName)) &&
-                        StringUtils.endsWithIgnoreCase(instance.getMetadata().get("currentVersion"), currentVersion)) {
+                if ((mustSameCluster && StringUtils.endsWithIgnoreCase(instance.getClusterName(), currentClusterName))){
+                    String instCurrentVersion = instance.getMetadata().get("currentVersion");
+                    if (instCurrentVersion == null){
+                        instCurrentVersion = DEFAULT_VERSION;
+                        instance.getMetadata().put("currentVersion", instCurrentVersion);
+                    }
 
-                    theSameClusterNameAndTheSameVersionInstList.add(instance);
+                    if ( StringUtils.endsWithIgnoreCase(instCurrentVersion, currentVersion)){
+                        theSameClusterNameAndTheSameVersionInstList.add(instance);
+                    }
                 }
             }
         }
