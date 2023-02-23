@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.2.RELEASE</version>
+    </parent>
+
     <groupId>com.zaqbest</groupId>
     <artifactId>zaq-parent</artifactId>
     <packaging>pom</packaging>
@@ -45,7 +51,6 @@
         <redission.version>3.16.8</redission.version>
 
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
-        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <spring-cloud-openfeign.version>2.2.5.RELEASE</spring-cloud-openfeign.version>
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
     </properties>
@@ -86,14 +91,6 @@
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-redis</artifactId>
                 <version>${zaq-base.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
 
             <dependency>
@@ -265,38 +262,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- 要将源码放上去，需要加入这个插件 -->
-                <plugin>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <configuration>
-                        <attach>true</attach>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <!-- 设置源文件编码方式 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>${project.build.jdk}</source>
-                        <target>${project.build.jdk}</target>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                </plugin>
-
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
@@ -325,6 +290,16 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- 设置源文件编码方式 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${project.build.jdk}</source>
+                    <target>${project.build.jdk}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
             </plugin>
         </plugins>
     </build>
