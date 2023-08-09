@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 /**
  * Swagger自定义配置
  * Created by macro on 2020/7/16.
@@ -15,7 +17,7 @@ public class SwaggerProperties {
     /**
      * API文档生成基础路径
      */
-    private String apiBasePackage;
+    private List<String> apiBasePackageList;
     /**
      * 是否要启用登录认证
      */

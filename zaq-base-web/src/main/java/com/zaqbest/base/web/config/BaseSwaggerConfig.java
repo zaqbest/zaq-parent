@@ -1,8 +1,11 @@
 package com.zaqbest.base.web.config;
 
 import com.zaqbest.base.web.domain.SwaggerProperties;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.ClassUtils;
+import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -14,6 +17,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * Swagger基础配置
@@ -30,7 +38,7 @@ public abstract class BaseSwaggerConfig {
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo(swaggerProperties))
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getApiBasePackage()))
+                .apis(basePackage(swaggerProperties.getApiBasePackageList()))
                 .paths(PathSelectors.any())
                 .build()
                 .enable(appConfig != null ? appConfig.getSwaggerEnable() : false);
@@ -84,4 +92,26 @@ public abstract class BaseSwaggerConfig {
      * 自定义Swagger配置
      */
     public abstract SwaggerProperties swaggerProperties();
+
+    public static Predicate<RequestHandler> basePackage(List<String> basePackageList) {
+        return input -> declaringClass(input).map(handlerPackage(basePackageList)).orElse(true);
+    }
+
+    private static Function<Class<?>, Boolean> handlerPackage(final List<String> basePackageList) {
+        return input -> {
+            // 循环判断匹配
+            for (String strPackage : basePackageList) {
+                boolean isMatch = input.getPackage().getName().startsWith(strPackage);
+                if (isMatch) {
+                    return true;
+                }
+            }
+            return false;
+        };
+    }
+
+    private static Optional<Class<?>> declaringClass(RequestHandler input) {
+        return ofNullable(input.declaringClass());
+    }
+
 }

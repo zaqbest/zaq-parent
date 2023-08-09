@@ -23,7 +23,7 @@ public class CommonResult<T> {
     /**
      * 数据封装
      */
-    @ApiModelProperty("报文体")
+    @ApiModelProperty
     private T data;
 
     protected CommonResult() {
