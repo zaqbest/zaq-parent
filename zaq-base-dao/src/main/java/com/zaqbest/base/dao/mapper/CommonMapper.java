@@ -1,4 +1,4 @@
-package com.zaqbest.base.dao.extend.mapper;
+package com.zaqbest.base.dao.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

@@ -15,7 +15,7 @@ public class CommonResult<T> {
     /**
      * 状态码
      */
-    private long code;
+    private int code;
     /**
      * 提示信息
      */
@@ -29,7 +29,7 @@ public class CommonResult<T> {
     protected CommonResult() {
     }
 
-    protected CommonResult(long code, String message, T data) {
+    protected CommonResult(int code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -69,6 +69,15 @@ public class CommonResult<T> {
      */
     public static <T> CommonResult<T> failed(IErrorCode errorCode,String message) {
         return new CommonResult<T>(errorCode.getCode(), message, null);
+    }
+
+    /**
+     * 失败返回结果
+     * @param errorCode 错误码
+     * @param message 错误信息
+     */
+    public static <T> CommonResult<T> failed(int errorCode,String message) {
+        return new CommonResult<T>(errorCode, message, null);
     }
 
     /**
@@ -119,7 +128,7 @@ public class CommonResult<T> {
         return code;
     }
 
-    public void setCode(long code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

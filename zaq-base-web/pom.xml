@@ -18,6 +18,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
             <groupId>com.zaqbest</groupId>
             <artifactId>zaq-base-comm</artifactId>
         </dependency>

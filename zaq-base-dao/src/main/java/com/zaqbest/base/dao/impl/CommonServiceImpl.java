@@ -1,8 +1,8 @@
-package com.zaqbest.base.dao.extend.impl;
+package com.zaqbest.base.dao.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zaqbest.base.dao.extend.mapper.CommonMapper;
+import com.zaqbest.base.dao.mapper.CommonMapper;
 
 import java.util.List;
 

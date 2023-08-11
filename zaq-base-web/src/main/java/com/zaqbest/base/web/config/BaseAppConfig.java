@@ -10,6 +10,10 @@ public abstract class BaseAppConfig {
     /**
      * 读取配置文件中的enable，true为显示，false为隐藏
      */
-    @Value("${app.swagger.enable:true}")
-    private Boolean swaggerEnable;
+    @Value("${app.swagger.enabled:true}")
+    private Boolean enableSwagger;
+
+
+    @Value("${app.weblog.enabled:true}")
+    private Boolean enableWebLog;
 }

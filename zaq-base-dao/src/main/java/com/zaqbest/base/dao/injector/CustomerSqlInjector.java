@@ -1,10 +1,10 @@
-package com.zaqbest.base.dao.extend.injector;
+package com.zaqbest.base.dao.injector;
 
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.zaqbest.base.dao.extend.injector.methods.SelectListForUpdate;
-import com.zaqbest.base.dao.extend.injector.methods.SelectOneForUpdate;
+import com.zaqbest.base.dao.injector.methods.SelectListForUpdate;
+import com.zaqbest.base.dao.injector.methods.SelectOneForUpdate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

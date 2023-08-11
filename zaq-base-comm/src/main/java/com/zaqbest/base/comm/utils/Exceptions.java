@@ -92,7 +92,7 @@ public class Exceptions {
      * 2019年4月3日 v0.0.1 fan 创建
      * ====================================================================
      */
-    public static void throwBusinessException(String errorCode, String errorMsg) {
+    public static void throwBusinessException(Integer errorCode, String errorMsg) {
         throw new BusinessException(errorCode, errorMsg);
     }
 }

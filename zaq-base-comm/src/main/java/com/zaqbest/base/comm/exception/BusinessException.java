@@ -2,11 +2,11 @@ package com.zaqbest.base.comm.exception;
 
 public class BusinessException extends RuntimeException {
 
-    private String errorCode;
+    private Integer errorCode;
 
     private String errorMessage;
 
-    public BusinessException(String errorCode, String errorMessage) {
+    public BusinessException(Integer errorCode, String errorMessage) {
         super(errorMessage);
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
@@ -22,11 +22,11 @@ public class BusinessException extends RuntimeException {
         this.errorMessage = errorMessage;
     }
 
-    public String getErrorCode() {
+    public Integer getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(String errorCode) {
+    public void setErrorCode(Integer errorCode) {
         this.errorCode = errorCode;
     }
 

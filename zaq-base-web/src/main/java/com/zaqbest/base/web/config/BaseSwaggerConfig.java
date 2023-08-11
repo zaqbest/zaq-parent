@@ -1,20 +1,16 @@
 package com.zaqbest.base.web.config;
 
 import com.zaqbest.base.web.domain.SwaggerProperties;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.util.ClassUtils;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +26,7 @@ import static java.util.Optional.ofNullable;
 public abstract class BaseSwaggerConfig {
 
     @Autowired
-    private BaseAppConfig appConfig;
+    private BaseAppConfig baseAppConfig;
 
     @Bean
     public Docket createRestApi() {
@@ -41,7 +37,7 @@ public abstract class BaseSwaggerConfig {
                 .apis(basePackage(swaggerProperties.getApiBasePackageList()))
                 .paths(PathSelectors.any())
                 .build()
-                .enable(appConfig != null ? appConfig.getSwaggerEnable() : false);
+                .enable(baseAppConfig != null ? baseAppConfig.getEnableSwagger() : false);
         if (swaggerProperties.isEnableSecurity()) {
             docket.securitySchemes(securitySchemes()).securityContexts(securityContexts());
         }
