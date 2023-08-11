@@ -1,6 +1,6 @@
-package com.zaqbest.base.web.config.impl;
+package com.zaqbest.base.web.autoconfiguration.impl;
 
-import com.zaqbest.base.web.config.BaseAppConfig;
+import com.zaqbest.base.web.autoconfiguration.properties.BaseAppConfig;
 import lombok.Data;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 

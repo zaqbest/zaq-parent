@@ -1,4 +1,4 @@
-package com.zaqbest.base.web.interceptor;
+package com.zaqbest.base.web.log.interceptor;
 
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
-@Component
 public class LogInterceptor implements HandlerInterceptor {
 
     private String TRACE_ID = "TRACE_ID";

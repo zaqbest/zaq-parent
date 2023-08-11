@@ -1,4 +1,4 @@
-package com.zaqbest.base.web.api;
+package com.zaqbest.base.web.domain;
 
 
 import com.zaqbest.base.comm.enums.IErrorCode;

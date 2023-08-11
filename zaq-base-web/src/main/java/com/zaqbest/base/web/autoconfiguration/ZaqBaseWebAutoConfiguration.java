@@ -1,10 +1,13 @@
 package com.zaqbest.base.web.autoconfiguration;
 
-import com.zaqbest.base.web.config.BaseAppConfig;
-import com.zaqbest.base.web.config.BaseSwaggerConfig;
-import com.zaqbest.base.web.config.WebTraceConfig;
-import com.zaqbest.base.web.config.impl.DefaultBaseAppConfig;
-import com.zaqbest.base.web.config.impl.DefaultBaseSwaggerConfig;
+import com.zaqbest.base.web.autoconfiguration.impl.DefaultBaseAppConfig;
+import com.zaqbest.base.web.autoconfiguration.impl.DefaultBaseGlobalExceptionHandler;
+import com.zaqbest.base.web.autoconfiguration.impl.DefaultBaseSwaggerConfig;
+import com.zaqbest.base.web.autoconfiguration.properties.BaseAppConfig;
+import com.zaqbest.base.web.autoconfiguration.properties.BaseSwaggerConfig;
+import com.zaqbest.base.web.autoconfiguration.properties.WebTraceConfig;
+import com.zaqbest.base.web.exception.BaseGlobalExceptionHandler;
+import com.zaqbest.base.web.log.interceptor.LogInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -26,9 +29,22 @@ public class ZaqBaseWebAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = "app.weblog", name = "enabled", havingValue = "true",
+    @ConditionalOnProperty(prefix = "zaq.webTrace", name = "enabled", havingValue = "true",
             matchIfMissing = true)
     public WebTraceConfig createWebTraceConfig(){
         return new WebTraceConfig();
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "zaq.webTrace", name = "enabled", havingValue = "true",
+            matchIfMissing = true)
+    public LogInterceptor createLogInterceptor(){
+        return new LogInterceptor();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(BaseGlobalExceptionHandler.class)
+    public BaseGlobalExceptionHandler createGlobalExceptionHandler(){
+        return new DefaultBaseGlobalExceptionHandler();
     }
 }

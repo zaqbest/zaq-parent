@@ -1,4 +1,4 @@
-package com.zaqbest.base.web.api;
+package com.zaqbest.base.web.domain;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Page;

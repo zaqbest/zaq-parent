@@ -1,8 +1,8 @@
-package com.zaqbest.base.web.config.impl;
+package com.zaqbest.base.web.autoconfiguration.impl;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
-import com.zaqbest.base.web.config.BaseSwaggerConfig;
-import com.zaqbest.base.web.domain.SwaggerProperties;
+import com.zaqbest.base.web.autoconfiguration.properties.BaseSwaggerConfig;
+import com.zaqbest.base.web.autoconfiguration.properties.SwaggerProperties;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 

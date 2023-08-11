@@ -1,7 +1,9 @@
-package com.zaqbest.base.web.domain;
+package com.zaqbest.base.web.log.domain;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.Date;
 
 /**
  * Controller层的日志封装类
@@ -9,7 +11,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class WebLog {
+public class WebLogDto {
     /**
      * 操作描述
      */
@@ -23,7 +25,7 @@ public class WebLog {
     /**
      * 操作时间
      */
-    private Long startTime;
+    private Date startTime;
 
     /**
      * 消耗时间
@@ -65,4 +67,9 @@ public class WebLog {
      */
     private Object result;
 
+    private String respCode;
+
+    private String respMessage;
+
+    private String exception;
 }
