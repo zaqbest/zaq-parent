@@ -1,4 +1,4 @@
-package com.zaqbest.base.web.log.domain;
+package com.zaqbest.base.web.log.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
