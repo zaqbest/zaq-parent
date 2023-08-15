@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: 'mysql:8.0.31'
+    container_name: mysql
+    privileged: true
+    command: ["mysqld"]
+    volumes:
+      - ./data/:/var/lib/mysql
+      - ./conf.d:/etc/mysql/conf.d
+      - ./my.cnf:/etc/mysql/my.cnf
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=XXXXXXXXXXXXXXXXXXXXXX
+      - LANG=C.UTF-8
