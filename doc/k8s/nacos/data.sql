@@ -1,1 +1,1 @@
-INSERT INTO users (username, password, enabled) VALUES ('nacos', '$2a$10$uWPyeufDZCYB4x25UpcN3.KlhfWLUZvZ4lpDW1qkLNf.g0NIdZacW', 1);
+INSERT INTO users (username, password, enabled) VALUES ('nacos', '$2a$10$c3HXDj59qIi.vqA4q.3KRej.Oz6ruHiXeBvPMze2EcBNqcs674gmG', 1);
