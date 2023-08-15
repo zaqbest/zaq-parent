@@ -1,0 +1,136 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: nacos
+  name: nacos
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: nacos
+  serviceName: discovery
+  template:
+    metadata:
+      labels:
+        app: nacos
+    spec:
+      affinity: {}
+      containers:
+        - env:
+            - name: NACOS_REPLICAS
+              value: "3"
+            - name: SERVICE_NAME
+              value: discovery
+            - name: DOMAIN_NAME
+              value: cluster.local
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: MYSQL_SERVICE_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: mysql.db.name
+                  name: nacos-cm
+            - name: MYSQL_SERVICE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: mysql.port
+                  name: nacos-cm
+            - name: MYSQL_SERVICE_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: mysql.user
+                  name: nacos-cm
+            - name: MYSQL_SERVICE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: mysql.password
+                  name: nacos-cm
+            - name: MYSQL_SERVICE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: mysql.host
+                  name: nacos-cm
+            - name: NACOS_SERVER_PORT
+              value: "8848"
+            - name: NACOS_APPLICATION_PORT
+              value: "8848"
+            - name: PREFER_HOST_MODE
+              value: hostname
+          image: harbor-dev.fusionfintrade.com:6443/allin-ops/nacos-server:v2.1.0
+          imagePullPolicy: Always
+          name: nacos
+          ports:
+            - containerPort: 8848
+              name: client-port
+              protocol: TCP
+            - containerPort: 9848
+              name: client-rpc
+              protocol: TCP
+            - containerPort: 9849
+              name: raft-rpc
+              protocol: TCP
+            - containerPort: 7848
+              name: old-raft-rpc
+              protocol: TCP
+            - containerPort: 8848
+              name: np
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 500m
+              memory: 2Gi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /home/nacos/plugins/peer-finder
+              name: data
+              subPath: peer-finder
+            - mountPath: /home/nacos/data
+              name: data
+              subPath: data
+            - mountPath: /home/nacos/logs
+              name: data
+              subPath: logs
+      dnsPolicy: ClusterFirst
+      initContainers:
+        - image: harbor-dev.fusionfintrade.com:6443/allin-ops/nacos-peer-finder-plugin:1.1
+          imagePullPolicy: Always
+          name: peer-finder-plugin-install
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /home/nacos/plugins/peer-finder
+              name: data
+              subPath: peer-finder
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        annotations:
+          volume.beta.kubernetes.io/storage-class: managed-nfs-storage
+        creationTimestamp: null
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 20Gi
+        volumeMode: Filesystem
+      status:
+        phase: Pending

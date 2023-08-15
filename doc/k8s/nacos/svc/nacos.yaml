@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nacos
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: np
+      port: 8848
+      protocol: TCP
+      targetPort: 8848
+  selector:
+    workload.user.cattle.io/workloadselector: apps.statefulset-cyl-nacos
+  sessionAffinity: None
+  type: ClusterIP

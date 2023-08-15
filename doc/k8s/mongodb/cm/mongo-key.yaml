@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  mongo.key: |
+    ahaksdnqsakdqnajhvckqaafnxasxaxaxmaskdadadsasfsdsdfsf
+    schcacnctcacncuadasdadadfbsasddfbadadwsioweewvaas
+    dfasasakjsvnaa
+kind: ConfigMap
+metadata:
+  name: mongo-key

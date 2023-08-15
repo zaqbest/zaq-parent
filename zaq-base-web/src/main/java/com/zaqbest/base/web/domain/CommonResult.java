@@ -55,14 +55,6 @@ public class CommonResult<T> {
     }
 
     /**
-     * 判断结果是否为成功
-     *
-     */
-    public boolean isSuccess() {
-        return ResultCodeEnum.SUCCESS.getCode() == this.code;
-    }
-
-    /**
      * 失败返回结果
      * @param errorCode 错误码
      */
@@ -132,7 +124,7 @@ public class CommonResult<T> {
         return new CommonResult<T>(ResultCodeEnum.FORBIDDEN.getCode(), ResultCodeEnum.FORBIDDEN.getMessage(), data);
     }
 
-    public long getCode() {
+    public int getCode() {
         return code;
     }
 

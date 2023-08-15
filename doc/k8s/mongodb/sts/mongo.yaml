@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+spec:
+  podManagementPolicy: Parallel
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      role: mongo
+  serviceName: mongo
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        role: mongo
+    spec:
+      containers:
+        - args:
+            - /home/mongodb/mongo-data-dir-permission.sh && docker-entrypoint.sh mongod --replSet=rs0 --dbpath=/var/lib/mongodb --bind_ip=0.0.0.0 --wiredTigerCacheSizeGB=2 --keyFile=/var/lib/mongoKey/mongo.key
+          command:
+            - /bin/sh
+            - -c
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_DATA_DIR
+              value: /var/lib/mongodb
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mongoRootPassword
+                  name: mongosecret
+            - name: SECOND_USER_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: infraDbPassword
+                  name: mongosecret
+          image: harbor-dev.fusionfintrade.com:6443/allin-ops/mongo:5.0.2
+          imagePullPolicy: IfNotPresent
+          name: mongo
+          ports:
+            - containerPort: 27017
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /var/lib/mongodb
+              name: mongo-data
+            - mountPath: /docker-entrypoint-initdb.d
+              name: mongoinit
+            - mountPath: /home/mongodb
+              name: mongopost
+            - mountPath: /var/lib/mongoKeyTemp
+              name: mongokey
+        - env:
+            - name: MONGO_SIDECAR_POD_LABELS
+              value: role=mongo
+            - name: KUBE_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: KUBERNETES_MONGO_SERVICE_NAME
+              value: mongo
+            - name: MONGODB_USERNAME
+              value: root
+            - name: MONGODB_DATABASE
+              value: admin
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mongoRootPassword
+                  name: mongosecret
+          image: harbor-dev.fusionfintrade.com:6443/allin-ops/mongo-k8s-sidecar:latest
+          imagePullPolicy: IfNotPresent
+          name: mongo-sidecar
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: mongo-account
+      serviceAccountName: mongo-account
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            defaultMode: 493
+            name: mongo-init
+          name: mongoinit
+        - configMap:
+            defaultMode: 493
+            name: mongo-scripts
+          name: mongopost
+        - configMap:
+            defaultMode: 493
+            name: mongo-key
+          name: mongokey
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        annotations:
+          volume.beta.kubernetes.io/storage-class: managed-nfs-storage
+        creationTimestamp: null
+        name: mongo-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
+        volumeMode: Filesystem
+      status:
+        phase: Pending

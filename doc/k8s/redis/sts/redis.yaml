@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    workload.user.cattle.io/workloadselector: apps.statefulset-cyl-redis
+  name: redis
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.statefulset-cyl-redis
+  serviceName: redis
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: redis
+        appCluster: redis-cluster
+        workload.user.cattle.io/workloadselector: apps.statefulset-cyl-redis
+    spec:
+      affinity: {}
+      containers:
+        - args:
+            - /etc/redis/redis.conf
+            - --protected-mode
+            - "no"
+          command:
+            - redis-server
+          image: harbor-dev.fusionfintrade.com:6443/allin-ops/redis:6.0.8
+          imagePullPolicy: IfNotPresent
+          name: redis
+          ports:
+            - containerPort: 6379
+              name: redis
+              protocol: TCP
+            - containerPort: 16379
+              name: cluster
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /etc/redis
+              name: redis-conf
+            - mountPath: /var/lib/redis
+              name: redis-data
+      dnsPolicy: ClusterFirst
+      nodeName: r-k8s-01
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 20
+      volumes:
+        - configMap:
+            defaultMode: 420
+            items:
+              - key: redis.conf
+                path: redis.conf
+            name: redis-conf
+          name: redis-conf
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        annotations:
+          volume.beta.kubernetes.io/storage-class: managed-nfs-storage
+        creationTimestamp: null
+        name: redis-data
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 5Gi
+        volumeMode: Filesystem
+      status:
+        phase: Pending

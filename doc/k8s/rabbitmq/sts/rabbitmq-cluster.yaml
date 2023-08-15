@@ -1,0 +1,136 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: rabbitmq-cluster
+  name: rabbitmq-cluster
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: rabbitmq-cluster
+  serviceName: rabbitmq-cluster
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: rabbitmq-cluster
+    spec:
+      containers:
+        - args:
+            - -c
+            - cp -v /etc/rabbitmq/rabbitmq.conf ${RABBITMQ_CONFIG_FILE}; exec docker-entrypoint.sh rabbitmq-server
+          command:
+            - sh
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+            - name: RABBITMQ_ERLANG_COOKIE
+              value: SWvCP0Hrqv43NG7GybHC95ntCJKoW8UyNFWnBEWG8TY=
+            - name: K8S_SERVICE_NAME
+              value: rabbitmq-cluster
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: RABBITMQ_USE_LONGNAME
+              value: "true"
+            - name: RABBITMQ_NODENAME
+              value: rabbit@$(POD_NAME).$(K8S_SERVICE_NAME).$(POD_NAMESPACE).svc.cluster.local
+            - name: RABBITMQ_CONFIG_FILE
+              value: /var/lib/rabbitmq/rabbitmq.conf
+          image: harbor-dev.fusionfintrade.com:6443/allin-ops/rabbitmq:3.9.7-management-plugins
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+                - rabbitmq-diagnostics
+                - status
+            failureThreshold: 3
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 15
+          name: rabbitmq
+          ports:
+            - containerPort: 15672
+              name: http
+              protocol: TCP
+            - containerPort: 5672
+              name: amqp
+              protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+                - rabbitmq-diagnostics
+                - status
+            failureThreshold: 3
+            initialDelaySeconds: 20
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 10
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /etc/rabbitmq
+              name: config-volume
+            - mountPath: /var/lib/rabbitmq
+              name: rabbitmq-storage
+            - mountPath: /etc/localtime
+              name: timezone
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: rabbitmq-cluster
+      serviceAccountName: rabbitmq-cluster
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            defaultMode: 420
+            items:
+              - key: rabbitmq.conf
+                path: rabbitmq.conf
+              - key: enabled_plugins
+                path: enabled_plugins
+            name: rabbitmq-cluster-config
+          name: config-volume
+        - hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+            type: ""
+          name: timezone
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        creationTimestamp: null
+        name: rabbitmq-storage
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 2Gi
+        storageClassName: managed-nfs-storage
+        volumeMode: Filesystem
+      status:
+        phase: Pending

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-np
+spec:
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: web-ui
+      nodePort: 30510
+      port: 5000
+      protocol: TCP
+      targetPort: 5000
+    - name: data
+      nodePort: 30910
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+  selector:
+    app: minio
+  sessionAffinity: None
+  type: NodePort
