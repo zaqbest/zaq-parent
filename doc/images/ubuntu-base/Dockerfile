@@ -11,7 +11,9 @@ RUN apt-get update && \
     apt install -y iproute2 net-tools iputils-ping procps tcpdump vim wget curl && \
     apt-get clean && \
     apt-get autoremove && \
-    chmod 755 /app/entrypoint.sh
+    chmod 755 /app/entrypoint.sh && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo 'Asia/Shanghai' >/etc/timezone
 
 CMD ["/bin/bash"]
 
