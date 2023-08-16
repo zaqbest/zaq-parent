@@ -1,4 +1,4 @@
-package com.zaqbest.base.comm.extend.ribbon.loadbalance;
+package com.zaqbest.base.web.loadbalance;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
@@ -14,6 +14,7 @@ import com.netflix.loadbalancer.BaseLoadBalancer;
 import com.netflix.loadbalancer.Server;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ import java.util.List;
  */
 
 @Slf4j
+@ConditionalOnProperty(prefix = "zaq.loadbalance", name = "enabled", havingValue = "true",
+        matchIfMissing = true)
 public class SameClusterPriorityWithVersionRule extends AbstractLoadBalancerRule {
 
     @Autowired

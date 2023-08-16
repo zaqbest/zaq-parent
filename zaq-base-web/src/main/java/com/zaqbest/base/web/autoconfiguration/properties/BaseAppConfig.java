@@ -13,9 +13,12 @@ public abstract class BaseAppConfig {
     @Value("${zaq.swagger.enabled:true}")
     private Boolean enableSwagger;
 
-    @Value("${zaq.webtrace.enabled:true}")
+    @Value("${zaq.webTrace.enabled:true}")
     private Boolean enableWebTrace;
 
-    @Value("${zaq.weblog.enabled:true}")
+    @Value("${zaq.webLog.enabled:true}")
     private Boolean enableWebLog;
+
+    @Value("${zaq.loadBalance.enabled:true}")
+    private Boolean enableLoadBalance;
 }
