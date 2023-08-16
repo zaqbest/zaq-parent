@@ -6,7 +6,7 @@ metadata:
   name: nacos
 spec:
   podManagementPolicy: OrderedReady
-  replicas: 1
+  replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -21,7 +21,7 @@ spec:
       containers:
         - env:
             - name: NACOS_REPLICAS
-              value: "1"
+              value: "3"
             - name: SERVICE_NAME
               value: discovery
             - name: DOMAIN_NAME
@@ -130,7 +130,7 @@ spec:
           - ReadWriteMany
         resources:
           requests:
-            storage: 20Gi
+            storage: 5Gi
         volumeMode: Filesystem
       status:
         phase: Pending
