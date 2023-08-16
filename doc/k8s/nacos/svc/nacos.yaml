@@ -13,6 +13,6 @@ spec:
       protocol: TCP
       targetPort: 8848
   selector:
-    workload.user.cattle.io/workloadselector: apps.statefulset-cyl-nacos
+    app: nacos
   sessionAffinity: None
   type: ClusterIP

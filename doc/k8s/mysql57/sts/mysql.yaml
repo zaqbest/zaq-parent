@@ -20,6 +20,8 @@ spec:
       affinity: {}
       containers:
         - env:
+            - name: LANG
+              value: C.UTF-8
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -30,10 +32,10 @@ spec:
           livenessProbe:
             exec:
               command:
-                - mysqladmin
-                - ping
-                - -uroot
-                - -p${MYSQL_ROOT_PASSWORD}
+                - /bin/sh
+                - -c
+                - MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
+                - mysql -h 127.0.0.1 -u root -e "SELECT 1"
             failureThreshold: 3
             initialDelaySeconds: 30
             periodSeconds: 10
@@ -47,10 +49,10 @@ spec:
           readinessProbe:
             exec:
               command:
-                - mysqladmin
-                - ping
-                - -uroot
-                - -p${MYSQL_ROOT_PASSWORD}
+                - /bin/sh
+                - -c
+                - MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
+                - mysql -h 127.0.0.1 -u root -e "SELECT 1"
             failureThreshold: 3
             initialDelaySeconds: 5
             periodSeconds: 2
