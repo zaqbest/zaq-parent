@@ -41,10 +41,4 @@ public class ZaqBaseWebAutoConfiguration {
     public LogInterceptor createLogInterceptor(){
         return new LogInterceptor();
     }
-
-    @Bean
-    @ConditionalOnMissingBean(BaseGlobalExceptionHandler.class)
-    public BaseGlobalExceptionHandler createGlobalExceptionHandler(){
-        return new DefaultBaseGlobalExceptionHandler();
-    }
 }

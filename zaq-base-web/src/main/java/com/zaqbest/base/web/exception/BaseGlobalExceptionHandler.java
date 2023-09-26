@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
  * 
  * @author ruoyi
  */
-@RestControllerAdvice
 public class BaseGlobalExceptionHandler
 {
     private static final Logger log = LoggerFactory.getLogger(BaseGlobalExceptionHandler.class);

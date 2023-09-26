@@ -15,21 +15,21 @@ public class CommonResult<T> {
     /**
      * 状态码
      */
-    private int code;
+    public int code;
     /**
      * 提示信息
      */
-    private String message;
+    public String message;
     /**
      * 数据封装
      */
     @ApiModelProperty
-    private T data;
+    public T data;
 
-    protected CommonResult() {
+    public CommonResult() {
     }
 
-    protected CommonResult(int code, String message, T data) {
+    public CommonResult(int code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
