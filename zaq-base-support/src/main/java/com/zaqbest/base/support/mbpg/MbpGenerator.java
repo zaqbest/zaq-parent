@@ -18,7 +18,7 @@ import com.zaqbest.base.support.mbpg.dto.GenerateReqDto;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Generator {
+public class MbpGenerator {
 
     public static void generate(GenerateReqDto reqDto){
         Map<OutputFile, String> pathInfo = new HashMap<>();

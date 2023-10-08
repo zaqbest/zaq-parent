@@ -1,7 +1,7 @@
 package com.zaqbest.base.support;
 
 import com.baomidou.mybatisplus.generator.config.TemplateType;
-import com.zaqbest.base.support.mbpg.Generator;
+import com.zaqbest.base.support.mbpg.MbpGenerator;
 import com.zaqbest.base.support.mbpg.dto.GenerateReqDto;
 import org.junit.Test;
 
@@ -23,11 +23,11 @@ public class ZaqBaseSupportMbpgTest
         reqDto.setOutputHome("/Users/lipan/MyData/tmpDir/generator");
 
         reqDto.setAuthor("mbp-generator");
-        reqDto.setTableInclude(new String[]{"template_market"});
+        reqDto.setTableInclude(new String[]{"template_user"});
         reqDto.setTablePrefix(new String[]{});
 
         reqDto.setDisableTemplateTypes(new TemplateType[]{TemplateType.CONTROLLER, TemplateType.SERVICE, TemplateType.SERVICE_IMPL});
 
-        Generator.generate(reqDto);
+        MbpGenerator.generate(reqDto);
     }
 }
