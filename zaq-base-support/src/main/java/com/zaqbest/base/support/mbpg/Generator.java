@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.TemplateType;
 import com.baomidou.mybatisplus.generator.config.builder.Controller;
 import com.baomidou.mybatisplus.generator.config.builder.Entity;
+import com.baomidou.mybatisplus.generator.config.builder.Mapper;
 import com.baomidou.mybatisplus.generator.config.builder.Service;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
@@ -13,7 +14,6 @@ import com.baomidou.mybatisplus.generator.fill.Column;
 import com.zaqbest.base.dao.entity.BaseEntity;
 import com.zaqbest.base.dao.mapper.CommonMapper;
 import com.zaqbest.base.support.mbpg.dto.GenerateReqDto;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,32 +45,8 @@ public class Generator {
 
         fastAutoGenerator.strategyConfig(
                 builder -> {
-                    builder.addInclude(reqDto.getTableInclude())
-                            .addTablePrefix(reqDto.getTablePrefix())
-                            //entity配置
-                            .entityBuilder()
-                            .formatFileName("%sEntity")
-                            .enableFileOverride()
-                            //.enableColumnConstant()
-                            .enableChainModel()
-                            .enableTableFieldAnnotation()
-                            .logicDeleteColumnName("is_delete")
-                            .logicDeletePropertyName("isDelete")
-                            .addTableFills(new Column("create_time", FieldFill.INSERT))
-                            .addTableFills(new Column("update_time", FieldFill.INSERT_UPDATE))
-                            .addTableFills(new Column("is_delete", FieldFill.INSERT))
-                            .enableLombok()
-                            .superClass(BaseEntity.class)
-                            //mapper配置
-                            .mapperBuilder()
-                            .enableFileOverride()
-                            .superClass(CommonMapper.class)
-                            .mapperAnnotation(Mapper.class)
-                            .enableBaseResultMap()
-                            .enableBaseColumnList()
-
-                            .serviceBuilder().enableFileOverride()
-                            .controllerBuilder().enableFileOverride(); // 设置需要生成的表名
+                    builder.addInclude(reqDto.getTableInclude());
+                    builder.addTablePrefix(reqDto.getTablePrefix());
 
                     // entity
                     Entity.Builder tableBuilder = builder.entityBuilder();
@@ -90,12 +66,12 @@ public class Generator {
                     }
 
                     // mapper
-                    com.baomidou.mybatisplus.generator.config.builder.Mapper.Builder mapperBuilder = builder.mapperBuilder();
+                    Mapper.Builder mapperBuilder = builder.mapperBuilder();
                     mapperBuilder.enableFileOverride()
                             .superClass(CommonMapper.class)
-//                            .mapperAnnotation(Mapper.class)
                             .enableBaseResultMap()
-                            .enableBaseColumnList();
+                            .enableBaseColumnList()
+                            .enableMapperAnnotation();
 
                     // service
                     Service.Builder serviceBuilder = builder.serviceBuilder();
