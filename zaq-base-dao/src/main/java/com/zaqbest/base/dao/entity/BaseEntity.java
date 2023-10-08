@@ -18,12 +18,14 @@ public class BaseEntity implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     Long id;
 
+    @TableField(value = "create_user")
     Long createUser;
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     Date createTime;
 
+    @TableField(value = "update_user")
     Long updateUser;
 
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)

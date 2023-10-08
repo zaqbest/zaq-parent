@@ -41,11 +41,16 @@ public class MapperUtils {
      *
      * @param obj
      * @return
-     * @throws Exception
      */
-    public static String obj2json(Object obj) throws Exception {
+    public static String obj2json(Object obj) {
         objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
-        return objectMapper.writeValueAsString(obj);
+        String result = null;
+        try{
+            result = objectMapper.writeValueAsString(obj);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return result;
     }
 
     /**
@@ -53,11 +58,16 @@ public class MapperUtils {
      *
      * @param obj
      * @return
-     * @throws Exception
      */
-    public static String obj2json(Object obj, ObjectMapper objectMapper) throws Exception {
+    public static String obj2json(Object obj, ObjectMapper objectMapper) {
         objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
-        return objectMapper.writeValueAsString(obj);
+        String result = null;
+        try{
+            result = objectMapper.writeValueAsString(obj);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return result;
     }
 
 
@@ -66,11 +76,16 @@ public class MapperUtils {
      *
      * @param obj
      * @return
-     * @throws Exception
      */
-    public static String obj2jsonIgnoreNull(Object obj) throws Exception {
+    public static String obj2jsonIgnoreNull(Object obj) {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        return objectMapper.writeValueAsString(obj);
+        String result = null;
+        try{
+            result = objectMapper.writeValueAsString(obj);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return result;
     }
 
     /**
@@ -78,11 +93,16 @@ public class MapperUtils {
      *
      * @param obj
      * @return
-     * @throws Exception
      */
-    public static String obj2jsonIgnoreNull(Object obj, ObjectMapper objectMapper) throws Exception {
+    public static String obj2jsonIgnoreNull(Object obj, ObjectMapper objectMapper) {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        return objectMapper.writeValueAsString(obj);
+        String result = null;
+        try{
+            result = objectMapper.writeValueAsString(obj);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return result;
     }
 
     /**
@@ -91,11 +111,17 @@ public class MapperUtils {
      * @param jsonString
      * @param clazz
      * @return
-     * @throws Exception
      */
-    public static <T> T json2pojo(String jsonString, Class<T> clazz) throws Exception {
+    public static <T> T json2pojo(String jsonString, Class<T> clazz) {
         objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-        return objectMapper.readValue(jsonString, clazz);
+
+        T result = null;
+        try{
+            result = objectMapper.readValue(jsonString, clazz);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return result;
     }
 
     /**
@@ -103,11 +129,16 @@ public class MapperUtils {
      *
      * @param jsonString
      * @return
-     * @throws Exception
      */
-    public static <T> Map<String, Object> json2map(String jsonString) throws Exception {
+    public static <T> Map<String, Object> json2map(String jsonString) {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        return objectMapper.readValue(jsonString, Map.class);
+        Map<String, Object>  result = null;
+        try{
+            result = objectMapper.readValue(jsonString, Map.class);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return result;
     }
 
     /**
