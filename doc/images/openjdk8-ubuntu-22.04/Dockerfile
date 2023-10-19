@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM harbor-dev.fusionfintrade.com:6443/lptest/ubuntu-base:multi-arch
+FROM --platform=$TARGETPLATFORM harbor-dev.fusionfintrade.com:6443/lptest/baseimage:1.0.0-ubuntu-22.04
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM

@@ -1,14 +1,15 @@
-FROM --platform=$TARGETPLATFORM ubuntu:20.04
+FROM --platform=$TARGETPLATFORM ubuntu:22.04
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
 WORKDIR /app
 
-COPY entrypoint.sh /app/entrypoint.sh
+COPY ./entrypoint.sh /app/entrypoint.sh
 
-RUN apt-get update && \
-    apt install -y iproute2 net-tools iputils-ping procps tcpdump vim wget curl && \
+RUN apt update && \
+    apt-get upgrade && \
+    apt-get install -y ca-certificates wget curl && \
     apt-get clean && \
     apt-get autoremove && \
     chmod 755 /app/entrypoint.sh && \

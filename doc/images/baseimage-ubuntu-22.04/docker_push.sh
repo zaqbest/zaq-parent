@@ -7,7 +7,7 @@ export DOCKER_REGISTRY_USERNAME=${DEV_DOCKER_REGISTRY_USERNAME}
 export DOCKER_REGISTRY_PASSWORD=${DEV_DOCKER_REGISTRY_PASSWORD}
 
 export PLATFORMS=${PLATFORMS:=linux/amd64,linux/arm64}
-export IMAGE_NAME=ubuntu-openjdk8:multi-arch
+export IMAGE_NAME=baseimage:1.0.0-ubuntu-22.04
 export DOCKERFILE_PATH=./Dockerfile
 export CONTEXT_PATH=.
 
@@ -40,5 +40,4 @@ docker buildx build \
 --push ${CONTEXT_PATH}
 
 docker logout $DOCKER_REGISTRY_URL
-
 
