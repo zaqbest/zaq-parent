@@ -1,7 +1,5 @@
-package com.zaqbest.base.web.autoconfiguration.properties;
+package com.zaqbest.base.web.properties;
 
-import com.zaqbest.base.web.autoconfiguration.properties.BaseAppConfig;
-import com.zaqbest.base.web.autoconfiguration.properties.SwaggerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.RequestHandler;
@@ -26,9 +24,6 @@ import static java.util.Optional.ofNullable;
  */
 public abstract class BaseSwaggerConfig {
 
-    @Autowired
-    private BaseAppConfig baseAppConfig;
-
     @Bean
     public Docket createRestApi() {
         SwaggerProperties swaggerProperties = swaggerProperties();
@@ -37,8 +32,7 @@ public abstract class BaseSwaggerConfig {
                 .select()
                 .apis(basePackage(swaggerProperties.getApiBasePackageList()))
                 .paths(PathSelectors.any())
-                .build()
-                .enable(baseAppConfig != null ? baseAppConfig.getEnableSwagger() : false);
+                .build();
         if (swaggerProperties.isEnableSecurity()) {
             docket.securitySchemes(securitySchemes()).securityContexts(securityContexts());
         }

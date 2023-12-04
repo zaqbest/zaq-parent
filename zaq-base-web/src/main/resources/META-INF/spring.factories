@@ -1,5 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.zaqbest.base.web.autoconfiguration.ZaqBaseWebAutoConfiguration,\
-com.zaqbest.base.web.log.WebLogAspect,\
-com.zaqbest.base.web.loadbalance.SameClusterPriorityWithVersionRule

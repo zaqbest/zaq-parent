@@ -1,12 +1,11 @@
 package com.zaqbest.base.web.exception;
 
 import com.zaqbest.base.comm.exception.BusinessException;
-import com.zaqbest.base.web.domain.CommonResult;
+import com.zaqbest.base.comm.domain.CommonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 

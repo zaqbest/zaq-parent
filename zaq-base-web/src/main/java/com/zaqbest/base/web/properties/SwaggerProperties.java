@@ -1,4 +1,4 @@
-package com.zaqbest.base.web.autoconfiguration.properties;
+package com.zaqbest.base.web.properties;
 
 import lombok.Builder;
 import lombok.Data;

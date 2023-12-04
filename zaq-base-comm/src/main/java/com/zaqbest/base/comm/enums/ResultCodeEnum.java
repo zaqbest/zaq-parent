@@ -10,6 +10,7 @@ public enum ResultCodeEnum implements IErrorCode {
     INTERNAL_ERROR(500, "Internal Server Error"),
     BAD_GATEWAY(502, "Bad Gateway"),
     UNAVAILABLE(503, "Service Unavailable"),
+    WARN(601, "Warn"),
     ;
     /**
      * 响应状态码

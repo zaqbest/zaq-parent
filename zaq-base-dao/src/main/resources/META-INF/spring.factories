@@ -1,3 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.zaqbest.base.dao.autoconfiguration.ZaqBaseDaoAutoConfiguration

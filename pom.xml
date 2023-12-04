@@ -13,27 +13,20 @@
     <groupId>com.zaqbest</groupId>
     <artifactId>zaq-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.4.2-SNAPSHOT</version>
+    <version>1.6.0-SNAPSHOT</version>
     <modules>
         <module>zaq-base-comm</module>
-        <module>zaq-base-web</module>
-        <module>zaq-base-mq</module>
         <module>zaq-base-dao</module>
-        <module>zaq-base-workflow</module>
+        <module>zaq-base-web</module>
         <module>zaq-base-cache</module>
-        <module>zaq-base-rpc-dubbo</module>
-        <module>zaq-base-support</module>
     </modules>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
         <project.build.locales>zh_CN</project.build.locales>
-        <project.build.jdk>${java.version}</project.build.jdk>
-
-        <zaq-base.version>1.4.2-SNAPSHOT</zaq-base.version>
+        <project.build.jdk>1.8</project.build.jdk>
 
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
@@ -43,15 +36,13 @@
         <mybatis-plus-boot.version>3.4.3.4</mybatis-plus-boot.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
 
-        <hutool.version>5.7.17</hutool.version>
+        <hutool.version>5.8.23</hutool.version>
         <knife4j.version>2.0.8</knife4j.version>
-        <activiti.version>5.22.0</activiti.version>
         <springfox-swagger.version>3.0.0</springfox-swagger.version>
         <hibernate-validator.version>6.1.7.Final</hibernate-validator.version>
         <pagehelper.version>1.3.0</pagehelper.version>
         <lombok.version>1.18.20</lombok.version>
         <redission.version>3.16.8</redission.version>
-
     </properties>
 
     <dependencyManagement>
@@ -59,42 +50,22 @@
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-comm</artifactId>
-                <version>${zaq-base.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-web</artifactId>
-                <version>${zaq-base.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-dao</artifactId>
-                <version>${zaq-base.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-mq</artifactId>
-                <version>${zaq-base.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-workflow</artifactId>
-                <version>${zaq-base.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-rpc-dubbo</artifactId>
-                <version>${zaq-base.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-cache</artifactId>
-                <version>${zaq-base.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-support</artifactId>
-                <version>${zaq-base.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -177,48 +148,6 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
             </dependency>
-
-            <!-- activiti begin -->
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-engine</artifactId>
-                <version>${activiti.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-spring</artifactId>
-                <version>${activiti.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-modeler</artifactId>
-                <version>${activiti.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-diagram-rest</artifactId>
-                <version>${activiti.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-explorer</artifactId>
-                <version>${activiti.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.vaadin</groupId>
-                        <artifactId>vaadin</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.vaadin.addons</groupId>
-                        <artifactId>dcharts-widget</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <!-- activiti end -->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>

@@ -1,17 +1,15 @@
-package com.zaqbest.base.web.domain;
-
+package com.zaqbest.base.comm.domain;
 
 import com.zaqbest.base.comm.enums.IErrorCode;
 import com.zaqbest.base.comm.enums.ResultCodeEnum;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
 
 /**
  * 通用返回对象
  * Created by macro on 2019/4/19.
  */
-@ApiModel
-public class CommonResult<T> {
+public class CommonResult<T> implements Serializable {
     /**
      * 状态码
      */
@@ -23,7 +21,6 @@ public class CommonResult<T> {
     /**
      * 数据封装
      */
-    @ApiModelProperty
     public T data;
 
     public CommonResult() {
