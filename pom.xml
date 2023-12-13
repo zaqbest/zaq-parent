@@ -28,6 +28,7 @@
         <project.build.locales>zh_CN</project.build.locales>
         <project.build.jdk>1.8</project.build.jdk>
 
+        <zaq.version>1.6.0-SNAPSHOT</zaq.version>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
 
@@ -50,22 +51,22 @@
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-comm</artifactId>
-                <version>${project.version}</version>
+                <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-web</artifactId>
-                <version>${project.version}</version>
+                <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-dao</artifactId>
-                <version>${project.version}</version>
+                <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
                 <artifactId>zaq-base-cache</artifactId>
-                <version>${project.version}</version>
+                <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
