@@ -3,9 +3,5 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
+    kubernetes.io/metadata.name: lptest
   name: lptest
-spec:
-  finalizers:
-  - kubernetes
-status:
-  phase: Active

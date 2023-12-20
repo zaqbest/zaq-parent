@@ -35,7 +35,6 @@
         <mysql.version>8.0.16</mysql.version>
         <mybatis-boot.version>2.1.4</mybatis-boot.version>
         <mybatis-plus-boot.version>3.4.3.4</mybatis-plus-boot.version>
-        <mybatis-generator.version>1.4.0</mybatis-generator.version>
 
         <hutool.version>5.8.23</hutool.version>
         <knife4j.version>2.0.8</knife4j.version>
@@ -44,6 +43,7 @@
         <pagehelper.version>1.3.0</pagehelper.version>
         <lombok.version>1.18.20</lombok.version>
         <redission.version>3.16.8</redission.version>
+        <fastjson.version>2.0.31</fastjson.version>
     </properties>
 
     <dependencyManagement>
@@ -154,10 +154,11 @@
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.version}</version>
             </dependency>
+
             <dependency>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-core</artifactId>
-                <version>${mybatis-generator.version}</version>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
         </dependencies>
 

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ss-server
+  namespace: aireport
+  labels:
+    app: ss-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ss-server
+  template:
+    metadata:
+      labels:
+        app: ss-server
+    spec:
+      containers:
+      - name: ss-server
+        image: shadowsocks/shadowsocks-libev
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8388
+            name: tcp-port
+            protocol: TCP
+          - containerPort: 8388
+            name: udp-port
+            protocol: UDP
+        env:
+          - name: PASSWORD
+            value: qazwsx
+          - name: DNS_ADDRS
+            value: 10.43.0.10

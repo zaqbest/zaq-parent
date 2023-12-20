@@ -1,0 +1,13 @@
+version: '3'
+services:
+  ss-server:
+    image: shadowsocks/shadowsocks-libev
+    container_name: ss-server
+    ports:
+      - 8388:8388
+    environment:
+      PASSWORD: qazwsx    #管理后台用户名
+      DNS_ADDRS: 192.168.111.2 #管理后台密码，最小8个字符
+    privileged: true
+    restart: always
+
