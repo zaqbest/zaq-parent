@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-DB_HOST=mysql.aireport.svc
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=123456
-DBS="fusion_chatreport nacos"
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASSWORD=
+DBS=""
 
 BACKUP_DIR=/Users/lipan/MyData/tmpDir/dbbackup
 FILENAME=aireport_`date +%Y%m%d%H%M%S`
