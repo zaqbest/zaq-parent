@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  redis:
+    image: 'redis'
+    restart: unless-stopped
+    container_name: redis
+    privileged: true
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data:/data
+    ports:
+      - "6379:6379"

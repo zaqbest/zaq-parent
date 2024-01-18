@@ -13,12 +13,13 @@
     <groupId>com.zaqbest</groupId>
     <artifactId>zaq-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.6.0-SNAPSHOT</version>
+    <version>1.7.0-SNAPSHOT</version>
     <modules>
-        <module>zaq-base-comm</module>
-        <module>zaq-base-dao</module>
-        <module>zaq-base-web</module>
-        <module>zaq-base-cache</module>
+        <module>zaq-core-starter</module>
+        <module>zaq-dao-starter</module>
+        <module>zaq-web-starter</module>
+        <module>zaq-redis-starter</module>
+        <module>zaq-mongodb-starter</module>
     </modules>
 
     <properties>
@@ -28,7 +29,7 @@
         <project.build.locales>zh_CN</project.build.locales>
         <project.build.jdk>1.8</project.build.jdk>
 
-        <zaq.version>1.6.0-SNAPSHOT</zaq.version>
+        <zaq.version>1.7.0-SNAPSHOT</zaq.version>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
 
@@ -44,28 +45,29 @@
         <lombok.version>1.18.20</lombok.version>
         <redission.version>3.16.8</redission.version>
         <fastjson.version>2.0.31</fastjson.version>
+        <commons.pool2.version>2.9.0</commons.pool2.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-comm</artifactId>
+                <artifactId>zaq-core-starter</artifactId>
                 <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-web</artifactId>
+                <artifactId>zaq-web-starter</artifactId>
                 <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-dao</artifactId>
+                <artifactId>zaq-dao-starter</artifactId>
                 <version>${zaq.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.zaqbest</groupId>
-                <artifactId>zaq-base-cache</artifactId>
+                <artifactId>zaq-redis-starter</artifactId>
                 <version>${zaq.version}</version>
             </dependency>
             <dependency>
@@ -160,6 +162,13 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
+
+            <!--lettuce-连接池-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons.pool2.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
@@ -217,16 +226,60 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- 设置源文件编码方式 -->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <source>${project.build.jdk}</source>-->
-<!--                    <target>${project.build.jdk}</target>-->
-<!--                    <encoding>${project.build.sourceEncoding}</encoding>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <!-- 跳过单元测试 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <!-- .git信息获取，检查打包是否为最新  -->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>2.2.6</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <!-- 默认绑定阶段initialize -->
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--日期格式;默认值:dd.MM.yyyy '@' HH:mm:ss z;-->
+                    <dateFormat>yyyy-MM-dd_HH-mm-ss</dateFormat>
+                    <!--,构建过程中,是否打印详细信息;默认值:false;-->
+                    <verbose>false</verbose>
+                    <!-- ".git"文件路径;默认值:${project.basedir}/.git; ${project.basedir}：项目根目录，即包含pom.xml文件的目录-->
+                    <!-- dotGitDirectory>${project.basedir}/../../../.git</dotGitDirectory -->
+                    <!--若项目打包类型为pom,是否取消构建;默认值:true;-->
+                    <skipPoms>true</skipPoms>
+                    <!--是否生成"git.properties"文件;默认值:false;-->
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <!--指定"git.properties"文件的存放路径(相对于${project.basedir}的一个路径);-->
+                    <!-- generateGitPropertiesFilename>/src/main/resources/git.properties</generateGitPropertiesFilename -->
+                    <!--".git"文件夹未找到时,构建是否失败;若设置true,则构建失败;若设置false,则跳过执行该目标;默认值:true;-->
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <!--git描述配置,可选;由JGit提供实现;-->
+                    <gitDescribe>
+                        <!--是否生成描述属性-->
+                        <skip>false</skip>
+                        <!--提交操作未发现tag时,仅打印提交操作ID,-->
+                        <always>false</always>
+                        <!--提交操作ID显式字符长度,最大值为:40;默认值:7; 0代表特殊意义;后面有解释;-->
+                        <abbrev>7</abbrev>
+                        <!--构建触发时,代码有修改时(即"dirty state"),添加指定后缀;默认值:"";-->
+                        <dirty>-dirty</dirty>
+                        <!--always print using the "tag-commits_from_tag-g_commit_id-maybe_dirty" format, even if "on" a tag.
+                            The distance will always be 0 if you're "on" the tag.  -->
+                        <forceLongFormat>false</forceLongFormat>
+                    </gitDescribe>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
