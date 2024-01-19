@@ -17,7 +17,7 @@ import java.util.Set;
  * @date 2022/3/23
  */
 @Configuration
-@ConfigurationProperties(prefix = "spring.redis.sentinel")
+@ConfigurationProperties(prefix = "spring.redis")
 @Data
 public class RedisConfigurationProperties {
 

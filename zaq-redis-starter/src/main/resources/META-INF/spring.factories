@@ -1,2 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.zaqbest.core.redis.config.RedisConfigurationProperties
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#  com.zaqbest.core.redis.config.RedisConfigurationProperties

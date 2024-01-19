@@ -29,7 +29,7 @@ public class RedisHelper {
      */
     private final static String REDIS_SEPARATOR = ":";
 
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate redisTemplate;
 
     private StringRedisTemplate stringRedisTemplate;
 
@@ -153,15 +153,12 @@ public class RedisHelper {
 
     // ============================String=============================
 
-    /**
-     * 普通缓存获取
-     *
-     * @param key 键
-     * @return 值
-     */
-    public Object get(String key) {
-        return key == null ? null : redisTemplate.opsForValue().get(key);
+    public <T> T getCacheObject(final String key)
+    {
+        ValueOperations<String, T> operation = redisTemplate.opsForValue();
+        return operation.get(key);
     }
+
     // ============================String=============================
 
     /**
@@ -850,7 +847,7 @@ public class RedisHelper {
      * @return
      */
     public Set<String> scan(String key) {
-        Set<String> res = this.redisTemplate.execute(new RedisCallback<Set<String>>() {
+        Set<String> res = (Set<String>) this.redisTemplate.execute(new RedisCallback<Set<String>>() {
 
             @Override
             public Set<String> doInRedis(RedisConnection connection) throws DataAccessException {
@@ -875,7 +872,7 @@ public class RedisHelper {
      * @return
      */
     public Long scanSize(String key) {
-        long dbSize = this.redisTemplate.execute(new RedisCallback<Long>() {
+        long dbSize = (long) this.redisTemplate.execute(new RedisCallback<Long>() {
 
             @Override
             public Long doInRedis(RedisConnection connection) throws DataAccessException {
