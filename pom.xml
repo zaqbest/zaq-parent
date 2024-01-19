@@ -13,7 +13,7 @@
     <groupId>com.zaqbest</groupId>
     <artifactId>zaq-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.7.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>zaq-core-starter</module>
         <module>zaq-dao-starter</module>
@@ -29,7 +29,7 @@
         <project.build.locales>zh_CN</project.build.locales>
         <project.build.jdk>1.8</project.build.jdk>
 
-        <zaq.version>1.7.0-SNAPSHOT</zaq.version>
+        <zaq.version>1.0.0-SNAPSHOT</zaq.version>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
 
