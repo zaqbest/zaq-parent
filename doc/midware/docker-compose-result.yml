@@ -1,0 +1,123 @@
+version: '3.7'
+
+services:
+  mysql80:
+    image: 'mysql:8.0.31'
+    container_name: mysql80
+    privileged: true
+    command: ["mysqld"]
+    volumes:
+      - ./mysql80/data/:/var/lib/mysql
+      - ./mysql80/conf.d:/etc/mysql/conf.d
+      - ./mysql80/my.cnf:/etc/mysql/my.cnf
+    ports:
+      - "30204:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=tyliv36MiWmXtobwes5j
+      - LANG=C.UTF-8
+  mysql57:
+    image: 'mysql:5.7'
+    container_name: mysql57
+    privileged: true
+    command: [ "mysqld" ]
+    volumes:
+      - ./mysql57/data/:/var/lib/mysql
+      - ./mysql57/conf.d:/etc/mysql/conf.d
+      - ./mysql57/my.cnf:/etc/mysql/my.cnf
+    ports:
+      - "34358:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=srkK0JIdXqq1XS22wzru
+      - LANG=C.UTF-8
+  mongodb:
+    image: mongo:4.4.0
+    container_name: mongo
+    command: [ --auth ]
+    ports:
+      - 33140:27017
+    volumes:
+      - ./mongodb/database:/data/db
+      - ./mongodb/log:/var/log/mongodb  # 挂载日志目录
+      - ./mongodb/config:/etc/mongo  # 挂载配置目录
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=HCDDf6KX2ZObTgL2KUTc
+  nacos:
+    image: 'nacos/nacos-server:v2.1.0-slim'
+    container_name: nacos
+    privileged: true
+    ports:
+      - "0.0.0.0:8848:8848"
+    environment:
+      - JVM_XMS=512m
+      - JVM_XMX=512m
+      - JVM_XMN=256m
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=mysql80
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_DB_NAME=9phgZKf6YJHacFSzpRMv
+      - MYSQL_SERVICE_USER=nacos
+      - MYSQL_SERVICE_PASSWORD=x41brmGAw5bkqftErhHq
+      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+  redis-single:
+    image: 'redis'
+    restart: unless-stopped
+    container_name: redis-single
+    privileged: true
+    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    volumes:
+      - ./redis-single/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-single/data:/data
+    ports:
+      - "39245:6379"
+  rabbitmq:
+    image: 'rabbitmq:management'
+    container_name: rabbitmq
+    privileged: true
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq
+    ports:
+      - "38458:5672"
+      - "34070:15672"
+      - "32795:25672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=axmpRWzxfO1bUR3u8HUo
+  minio:
+    image: minio/minio:RELEASE.2022-12-02T19-19-22Z
+    container_name: minio
+    hostname: "minio"
+    ports:
+      - 39135:9000 # api 端口
+      - 36456:9001 # 控制台端口
+    environment:
+      MINIO_ACCESS_KEY: cKYeNEFgseEKm2HiuDnH    #管理后台用户名
+      MINIO_SECRET_KEY: zynfLniA1XjEX9lHX6nU #管理后台密码，最小8个字符
+      MINIO_SERVER_URL: http://10.10.1.1:39135
+    volumes:
+      - ./minio/data:/data               #映射当前目录下的data目录至容器内/data目录
+      - ./minio/config:/root/.minio/     #映射配置目录
+    command: server --console-address ':9001' /data  #指定容器中的目录 /data
+    privileged: true
+    restart: always
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - 39511:9092
+    environment:
+      KAFKA_BROKER_ID: 0
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.10.1.1:39511
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+    volumes:
+      - ./kafka-single/data:/kafka
+    depends_on:
+      - zookeeper
+  zookeeper:
+    image: wurstmeister/zookeeper
+    volumes:
+      - ./zookeeper/data:/data
+    ports:
+      - 2182:2181
