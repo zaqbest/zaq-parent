@@ -47,7 +47,7 @@ services:
     container_name: nacos
     privileged: true
     ports:
-      - "0.0.0.0:8848:8848"
+      - "0.0.0.0:35745:8848"
     environment:
       - JVM_XMS=512m
       - JVM_XMX=512m
@@ -55,12 +55,16 @@ services:
       - PREFER_HOST_MODE=hostname
       - MODE=standalone
       - SPRING_DATASOURCE_PLATFORM=mysql
-      - MYSQL_SERVICE_HOST=${placeholder_nacos_database_host}
-      - MYSQL_SERVICE_PORT=${placeholder_nacos_database_port}
-      - MYSQL_SERVICE_DB_NAME=${placeholder_nacos_database}
-      - MYSQL_SERVICE_USER=${placeholder_nacos_username}
-      - MYSQL_SERVICE_PASSWORD=${placeholder_nacos_password}
+      - MYSQL_SERVICE_HOST=mysql80
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=${placeholder_mysql80_password}
       - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    links:
+      - mysql80
+    depends_on:
+      - mysql80
   redis-single:
     image: 'redis'
     restart: unless-stopped
