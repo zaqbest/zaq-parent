@@ -370,7 +370,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`username`, `password`, `enabled`) VALUES ('nacos','$2a$10$.3uezp3QWbIcO4NWlZkfHeVmIEgibhiQ3PxNQJQuczwEb8eVztcY6',1);
+INSERT INTO `users` (`username`, `password`, `enabled`) VALUES ('nacos','$2a$10$7aQwA6hOU9s1DANcbJjhqe2QA/tzZG2rlLBAARjVj23y74999u.s.',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
