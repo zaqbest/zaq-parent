@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ss-libev-cm
+  namespace: lptest
+data:
+  # 配置文件名作为key
+  config.json: |
+    {
+    "server":"0.0.0.0",
+    "server_port":9000,
+    "local_address": "0.0.0.0",
+    "local_port":1080,
+    "password":"password0",
+    "timeout":300,
+    "method":"aes-256-gcm",
+    "fast_open":false,
+    "nameserver":"填写实际的dns服务器地址",
+    "mode":"tcp_and_udp"
+    }
+  startup.sh: |
+    ss-server -c  /etc/shadowsocks-libev/config.json &
+    ss-local -c /etc/shadowsocks-libev/config.json
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ss-libev
+  namespace: lptest
+  labels:
+    app: ss-libev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ss-libev
+  template:
+    metadata:
+      labels:
+        app: ss-libev
+    spec:
+      containers:
+        - name: ss-libev
+          command:
+            - /bin/sh
+            - -c
+              - /app/bin/startup.sh
+          image: 'teddysun/shadowsocks-libev'
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 1080
+              name: tcp-port
+              protocol: TCP
+            - containerPort: 1080
+              name: udp-port
+              protocol: UDP
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/shadowsocks-libev
+              subPath: config.json
+            - name: config-volume
+              mountPath: /app/bin
+              subPath: startup.sh
+      volumes:
+        - configMap:
+            defaultMode: 493
+            name: ss-libev-cm
+          name: config-volume
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ss-libev-np
+  namespace: lptest
+spec:
+  ports:
+    - name: tcp-port
+      nodePort: 32158
+      port: 1080
+      protocol: TCP
+      targetPort: 1080
+    - name: upd-port
+      nodePort: 32158
+      port: 1080
+      protocol: UDP
+      targetPort: 1080
+  selector:
+    app: ss-libev
+  sessionAffinity: None
+  type: NodePort
