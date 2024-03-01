@@ -4,7 +4,6 @@ metadata:
   name: ss-libev-cm
   namespace: lptest
 data:
-  # 配置文件名作为key
   config.json: |
     {
     "server":"0.0.0.0",
@@ -15,7 +14,7 @@ data:
     "timeout":300,
     "method":"aes-256-gcm",
     "fast_open":false,
-    "nameserver":"填写实际的dns服务器地址",
+    "nameserver":"10.96.0.10",
     "mode":"tcp_and_udp"
     }
   startup.sh: |
@@ -40,12 +39,19 @@ spec:
       labels:
         app: ss-libev
     spec:
+      initContainers:
+        - name: install
+          image: busybox
+          command:
+            - /bin/sh
+            - -c
+            - mkdir -p /etc/shadowsocks-libev
       containers:
         - name: ss-libev
           command:
             - /bin/sh
             - -c
-              - /app/bin/startup.sh
+            - sh /app/bin/startup.sh
           image: 'teddysun/shadowsocks-libev'
           imagePullPolicy: IfNotPresent
           ports:
@@ -57,16 +63,20 @@ spec:
               protocol: UDP
           volumeMounts:
             - name: config-volume
-              mountPath: /etc/shadowsocks-libev
+              mountPath: /etc/shadowsocks-libev/config.json
               subPath: config.json
             - name: config-volume
-              mountPath: /app/bin
+              mountPath: /app/bin/startup.sh
               subPath: startup.sh
       volumes:
-        - configMap:
-            defaultMode: 493
+        - name: config-volume
+          configMap:
             name: ss-libev-cm
-          name: config-volume
+            items:
+              - key: config.json
+                path: config.json
+              - key: startup.sh
+                path: startup.sh
 
 ---
 apiVersion: v1
