@@ -3,7 +3,7 @@ services:
   nginx:
     image: nginx:1.23.2
     restart: unless-stopped
-    container_name: nginx
+    container_name: app_nginx
     ports:
       - 80:80
       - 443:443
