@@ -21,3 +21,4 @@ envsubst < docker-compose-tmpl.yml > docker-compose-result.yml
 envsubst < redis-single/redis-tmpl.conf > redis-single/redis.conf
 envsubst < seata-server/config/registry-tmpl.conf > seata-server/config/registry.conf
 envsubst < seata-server/seataServer-tmpl.properties > seata-server/seataServer.properties
+envsubst < rocketmq/broker/conf/brokder-tmpl.conf > rocketmq/broker/conf/brokder.conf

@@ -144,3 +144,40 @@ services:
     volumes:
       # 因为registry.conf中是nacos配置中心，只需要把registry.conf放到./seata-server/config文件夹中
       - "./seata-server/config:/root/seata-config"
+  rmq-namesrv:
+    image: apache/rocketmq:4.8.0
+    container_name: midware_rmq-namesrv
+    ports:
+      - 9876:9876
+    environment:
+      JAVA_OPT_EXT: "-server -Xms512m -Xmx512m"
+    volumes:
+      - ./rocketmq/namesrv/logs:/home/rocketmq/logs
+    command: sh mqnamesrv
+    restart: always
+  rmq-broker1:
+    image: apache/rocketmq:4.8.0
+    container_name: midware_rmqbroker1
+    links:
+      - rmq-namesrv
+    ports:
+      - 10909:10909
+      - 10911:10911
+      - 10912:10912
+    environment:
+      NAMESRV_ADDR: rmq-namesrv:9876
+      JAVA_OPT_EXT: "-server -Xms512m -Xmx512m"
+    volumes:
+      - ./rocketmq/broker/logs:/home/rocketmq/logs
+      - ./rocketmq/broker/store:/home/rocketmq/store
+      - ./rocketmq/broker/conf/broker.conf:/opt/rocketmq-4.8.0/conf/broker.conf
+    command: sh mqbroker -c /opt/rocketmq-4.8.0/conf/broker.conf
+    restart: always
+  rmq-dashboard:
+    image: apacherocketmq/rocketmq-dashboard:1.0.0
+    container_name: midware_rmq-bashboard
+    ports:
+      - 8080:8080
+    environment:
+      JAVA_OPTS: "-Drocketmq.namesrv.addr=rmq-namesrv:9876"
+    restart: always
