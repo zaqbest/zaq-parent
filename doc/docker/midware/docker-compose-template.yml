@@ -47,7 +47,10 @@ services:
     container_name: mid_nacos
     privileged: true
     ports:
-      - "0.0.0.0:35745:8848"
+      - "0.0.0.0:8848:8848"
+      - "0.0.0.0:9848:9848"
+      - "0.0.0.0:9849:9849"
+      - "0.0.0.0:7848:7848"
     environment:
       - JVM_XMS=512m
       - JVM_XMX=512m

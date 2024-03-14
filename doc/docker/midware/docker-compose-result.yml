@@ -47,7 +47,10 @@ services:
     container_name: midware_nacos
     privileged: true
     ports:
-      - "0.0.0.0:35745:8848"
+      - "0.0.0.0:8848:8848"
+      - "0.0.0.0:9848:9848"
+      - "0.0.0.0:9849:9849"
+      - "0.0.0.0:7848:7848"
     environment:
       - JVM_XMS=512m
       - JVM_XMX=512m
@@ -99,7 +102,7 @@ services:
     environment:
       MINIO_ACCESS_KEY: cKYeNEFgseEKm2HiuDnH    #管理后台用户名
       MINIO_SECRET_KEY: zynfLniA1XjEX9lHX6nU #管理后台密码，最小8个字符
-      MINIO_SERVER_URL: http://10.10.1.1:39135
+      MINIO_SERVER_URL: http://xxx.xxx.xxx.xxx:39135
     volumes:
       - ./minio/data:/data               #映射当前目录下的data目录至容器内/data目录
       - ./minio/config:/root/.minio/     #映射配置目录
