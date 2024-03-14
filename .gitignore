@@ -40,3 +40,8 @@ target
 
 # Maven ignore
 .flattened-pom.xml
+/doc/images/dockerhub_aliyun.env
+/doc/images/dockerhub_gn580.env
+/doc/images/dockerhub_public.env
+/doc/docker/midware/seata-server/config/registry.conf
+/doc/docker/midware/seata-server/seataServer.properties
