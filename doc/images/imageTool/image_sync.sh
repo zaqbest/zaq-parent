@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-DEST_USER=${DEV_DOCKER_REGISTRY_USERNAME}
-DEST_PASSWORD=${DEV_DOCKER_REGISTRY_PASSWORD}
 
-export SKOPEO_OPTION="--multi-arch all --override-os linux  --insecure-policy --dest-tls-verify=false --dest-username=${DEST_USER} --dest-password=${DEST_PASSWORD}"
+export SKOPEO_OPTION="--multi-arch all --override-os linux  --insecure-policy --dest-tls-verify=false --dest-username=${DEV_DOCKER_REGISTRY_USERNAME} --dest-password=${DEV_DOCKER_REGISTRY_PASSWORD}"
 
 function image_sync() {
     IMAGE_SRC=$1
@@ -12,4 +10,6 @@ function image_sync() {
     printf "同步镜像${IMAGE_SRC} => ${IMAGE_DST} 完成!\n"
 }
 
-image_sync rancher/rancher:v2.6.6 harbor-dev.fusionfintrade.com:6443/lptest/rancher/rancher:v2.6.6
+#image_sync curve25519xsalsa20poly1305/openvpn-socks5 ${DEV_DOCKER_REGISTRY_URL}/${DEV_DOCKER_REGISTRY_PROJECT}/openvpn-socks5
+image_sync harbor-dev.fusionfintrade.com:6443/sps/industry-fin-platform:v1.0.0 ${DEV_DOCKER_REGISTRY_URL}/${DEV_DOCKER_REGISTRY_PROJECT}/industry-fin-platform:v1.0.0
+image_sync harbor-dev.fusionfintrade.com:6443/sps/sps-rule-web:v1.0.0 ${DEV_DOCKER_REGISTRY_URL}/${DEV_DOCKER_REGISTRY_PROJECT}/sps-rule-web:v1.0.0

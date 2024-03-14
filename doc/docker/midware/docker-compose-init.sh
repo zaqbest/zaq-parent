@@ -4,13 +4,20 @@ function getRandom() {
     echo "$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20)"
 }
 
-export placeholder_hostname=10.10.1.1
-export placeholder_minio_username=$(getRandom)
-export placeholder_minio_password=$(getRandom)
-export placeholder_mongodb_password=$(getRandom)
-export placeholder_mysql57_password=$(getRandom)
-export placeholder_mysql80_password=$(getRandom)
-export placeholder_rabbitmq_username=admin
-export placeholder_rabbitmq_password=$(getRandom)
+export secret=${getRandom}
+export secret=1qaz!QAZ
 
-envsubst < docker-compose-template.yml > docker-compose-result.yml
+export placeholder_hostname=10.30.4.50
+export placeholder_minio_username=${secret}
+export placeholder_minio_password=${secret}
+export placeholder_mongodb_password=${secret}
+export placeholder_mysql57_password=${secret}
+export placeholder_mysql80_password=${secret}
+export placeholder_rabbitmq_username=admin
+export placeholder_rabbitmq_password=${secret}
+export placeholder_redis_password=${secret}
+
+envsubst < docker-compose-tmpl.yml > docker-compose-result.yml
+envsubst < redis-single/redis-tmpl.conf > redis-single/redis.conf
+envsubst < seata-server/config/registry-tmpl.conf > seata-server/config/registry.conf
+envsubst < seata-server/seataServer-tmpl.properties > seata-server/seataServer.properties
