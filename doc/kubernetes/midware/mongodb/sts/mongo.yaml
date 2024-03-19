@@ -37,7 +37,7 @@ spec:
                 secretKeyRef:
                   key: infraDbPassword
                   name: mongosecret
-          image: harbor-dev.fusionfintrade.com:6443/allin-ops/mongo:5.0.2
+          image: registry.cn-hangzhou.aliyuncs.com/zaqbest/mongo:5.0.2
           imagePullPolicy: IfNotPresent
           name: mongo
           ports:
@@ -74,7 +74,7 @@ spec:
                 secretKeyRef:
                   key: mongoRootPassword
                   name: mongosecret
-          image: harbor-dev.fusionfintrade.com:6443/allin-ops/mongo-k8s-sidecar:latest
+          image: registry.cn-hangzhou.aliyuncs.com/zaqbest/mongo-k8s-sidecar:latest
           imagePullPolicy: IfNotPresent
           name: mongo-sidecar
           resources: {}

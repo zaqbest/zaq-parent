@@ -7,6 +7,7 @@ services:
     privileged: true
     command: ["mysqld"]
     volumes:
+      - ./mysql80/log/:/var/log/mysql
       - ./mysql80/data/:/var/lib/mysql
       - ./mysql80/conf.d:/etc/mysql/conf.d
       - ./mysql80/my.cnf:/etc/mysql/my.cnf

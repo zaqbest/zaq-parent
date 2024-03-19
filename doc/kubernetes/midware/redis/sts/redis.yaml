@@ -28,7 +28,7 @@ spec:
             - "no"
           command:
             - redis-server
-          image: harbor-dev.fusionfintrade.com:6443/allin-ops/redis:6.0.8
+          image: redis:6.0.8-buster
           imagePullPolicy: IfNotPresent
           name: redis
           ports:

@@ -52,7 +52,7 @@ spec:
               value: rabbit@$(POD_NAME).$(K8S_SERVICE_NAME).$(POD_NAMESPACE).svc.cluster.local
             - name: RABBITMQ_CONFIG_FILE
               value: /var/lib/rabbitmq/rabbitmq.conf
-          image: harbor-dev.fusionfintrade.com:6443/allin-ops/rabbitmq:3.9.7-management-plugins
+          image: registry.cn-hangzhou.aliyuncs.com/zaqbest/rabbitmq:3.9.7-management-plugins
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:

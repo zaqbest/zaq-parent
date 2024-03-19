@@ -29,7 +29,7 @@ spec:
               value: admin
             - name: MINIO_ROOT_PASSWORD
               value: root123456
-          image: harbor-dev.fusionfintrade.com:6443/allin-ops/minio:latest
+          image: registry.cn-hangzhou.aliyuncs.com/zaqbest/minio:latest
           imagePullPolicy: IfNotPresent
           name: minio
           ports:
